@@ -1,12 +1,9 @@
 {
-  "name": "rm-api",
-  "version": "1.0.0",
+  "name": "RM-API-SDK-Nodejs",
   "description": "A NodeJS wrapper for some of the RESTful methods documented at doc.revenuemonster.my",
+  "repository": "git@github.com:RevenueMonster/RM-API-SDK-Nodejs.git",
+  "version": "0.1.0",
   "main": "lib",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Bakr Baroudi",
   "license": "MIT",
   "dependencies": {
     "crypto": "^1.0.1",
