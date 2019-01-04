@@ -1,6 +1,6 @@
 'use strict';
 
-var RMAPI = require('./lib'); // use require('RMAPI')
+var RMAPI = require('../src'); // use require('RMAPI')
 var fs = require('fs');
 
 var rm = RMAPI.configure(
@@ -37,7 +37,7 @@ async function log() {
     }
 
 
-    var privateKey = fs.readFileSync('lib/private.pem')
+    var privateKey = fs.readFileSync('../src/private.pem')
     privateKey = Buffer.from(privateKey).toString()
 
     // quick pay
