@@ -1,13 +1,22 @@
 {
-  "name": "RM-API-SDK-Nodejs",
+  "name": "rm-api-sdk-nodejs",
   "description": "A NodeJS wrapper for some of the RESTful methods documented at doc.revenuemonster.my",
   "repository": "git@github.com:RevenueMonster/RM-API-SDK-Nodejs.git",
   "version": "0.1.0",
   "main": "lib",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
     "crypto": "^1.0.1",
     "request": "^2.88.0",
     "url": "^0.11.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.18",
+    "typescript": "^3.2.2"
   }
 }
