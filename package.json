@@ -1,0 +1,16 @@
+{
+  "name": "rm-api",
+  "version": "1.0.0",
+  "description": "A NodeJS wrapper for some of the RESTful methods documented at doc.revenuemonster.my",
+  "main": "lib",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bakr Baroudi",
+  "license": "MIT",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "request": "^2.88.0",
+    "url": "^0.11.0"
+  }
+}
