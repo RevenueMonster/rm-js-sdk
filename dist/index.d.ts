@@ -1,14 +1,20 @@
-export declare type RMOpenAPIClient = {
-    env: string;
-    version: string;
-    timeout: number;
+import { AxiosInstance } from 'axios';
+interface config {
+    timeout?: number;
+    isProduction?: boolean;
     clientId: string;
     clientSecret: string;
-    getClientCredentials: any;
-    refreshToken: any;
-};
-/**
- * Create a API instance to interact with RevenueMonster Open API
- */
-export declare function init(): RMOpenAPIClient;
+}
+export interface RMSDKInstance {
+    timeout: number;
+    isProduction: boolean;
+    clientId: string;
+    clientSecret: string;
+    oauthInstance: AxiosInstance;
+    openApiInstance: AxiosInstance;
+    getClientCredentials: () => Promise<any> | null;
+    refreshToken: (refreshToken: string) => Promise<any>;
+}
+export declare function RMSDK(instanceConfig?: config): RMSDKInstance;
+export {};
 //# sourceMappingURL=index.d.ts.map

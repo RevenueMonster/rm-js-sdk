@@ -1,63 +1,81 @@
+import axios, { AxiosInstance } from 'axios';
+import { merge } from 'lodash'
+
 import { getClientCredentials, refreshToken } from "./credentials";
 
-export type RMOpenAPIClient = {
-    env: string,
-    version: string,
-    timeout: number,
-    clientId: string,
-    clientSecret: string,
-    getClientCredentials: any,
-    refreshToken: any,
+interface config {
+  timeout?: number
+  isProduction?: boolean
+  clientId: string
+  clientSecret: string
 }
 
-type RMArguments = {
-    env: string | null
-    timeout: number | null
-    clientId: string | null
-    clientSecret: string | null
+export interface RMSDKInstance {
+  timeout: number,
+  isProduction: boolean,
+  clientId: string,
+  clientSecret: string,
+
+  oauthInstance: AxiosInstance,
+  openApiInstance: AxiosInstance,
+
+  getClientCredentials: () => Promise<any> | null,
+  refreshToken: (refreshToken: string) => Promise<any>,
 }
 
-export class RMSDK {
-    public env: string
-    public timeout: number
-    public clientId: string
-    public clientSecret: string
+export function RMSDK(instanceConfig?: config): RMSDKInstance {
+  const defaults = {
+    timeout: 2000,
+    isProduction: false,
+    clientId: '',
+    clientSecret: '',
+  }
+  const config = merge(defaults, instanceConfig)
+  
+  const oauthUrl = config.isProduction
+    ? 'https://oauth.revenuemonster.my/v1'
+    : 'https://sb-oauth.revenuemonster.my/v1'
+  
+  const openApiUrl = config.isProduction
+    ? 'https://open.revenuemonster.my/v1'
+    : 'https://sb-open.revenuemonster.my/v1'
 
-    constructor(arg?: RMArguments) {
-        this.env = arg!.env || 'sandbox'
-        this.timeout = arg!.timeout || 2000
-        this.clientId = arg!.clientId || ''
-        this.clientSecret = arg!.clientSecret || ''
-    }
+  const oauthInstance = axios.create({
+    baseURL: oauthUrl,
+    timeout: config.timeout,
+    headers: { 'User-Agent': 'RM API Client Nodejs' }
+  })
+
+  const openApiInstance = axios.create({
+    baseURL: openApiUrl,
+    timeout: config.timeout,
+    headers: { 'User-Agent': 'RM API Client Nodejs' }
+  })
+
+  return {
+    timeout: config.timeout,
+    isProduction: config.isProduction,
+    clientId: config.clientId,
+    clientSecret: config.clientSecret,
+    
+    oauthInstance,
+    openApiInstance,
+
+    getClientCredentials,
+    refreshToken,
+  }
 }
 
-/**
- * Create a API instance to interact with RevenueMonster Open API
- */
-export function init(): RMOpenAPIClient {
-    return {
-        env: 'sandbox',
-        version: 'v1',
-        timeout: 2000,
-        clientId: '',
-        clientSecret: '',
+//////////
 
-        // credentials related
-        getClientCredentials,
-        refreshToken,
-    }
-}
+const SDK = RMSDK({
+  clientId: '5499912462549392881',
+  clientSecret: 'pwMapjZzHljBALIGHxfGGXmiGLxjWbkT'
+});
 
-const SDK = new RMSDK()
-SDK.clientId = '2948617732362532265'
-SDK.clientSecret = 'tuWQGvIeqQbJdwxVcLREkYOLBLemzVJJ'
-
-const APIClient = init()
-APIClient.clientId = '2948617732362532265'
-APIClient.clientSecret = 'tuWQGvIeqQbJdwxVcLREkYOLBLemzVJJ'
-
-;(async () => {
-    const a = await APIClient.getClientCredentials()
-    const b = await APIClient.refreshToken(a.refreshToken)
-    console.log(b)
-})()
+(async () => {
+  const a = await SDK.getClientCredentials();
+  // console.log(a);
+  const b = await SDK.refreshToken(a.refreshToken)
+  console.log(b)
+})();

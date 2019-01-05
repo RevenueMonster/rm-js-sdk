@@ -36,34 +36,58 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var axios_1 = require("axios");
+var lodash_1 = require("lodash");
 var credentials_1 = require("./credentials");
-/**
- * Create a API instance to interact with RevenueMonster Open API
- */
-function init() {
-    return {
-        env: 'sandbox',
-        version: 'v1',
+function RMSDK(instanceConfig) {
+    var defaults = {
         timeout: 2000,
+        isProduction: false,
         clientId: '',
         clientSecret: '',
-        // credentials related
+    };
+    var config = lodash_1.merge(defaults, instanceConfig);
+    var oauthUrl = config.isProduction
+        ? 'https://oauth.revenuemonster.my/v1'
+        : 'https://sb-oauth.revenuemonster.my/v1';
+    var openApiUrl = config.isProduction
+        ? 'https://open.revenuemonster.my/v1'
+        : 'https://sb-open.revenuemonster.my/v1';
+    var oauthInstance = axios_1.default.create({
+        baseURL: oauthUrl,
+        timeout: config.timeout,
+        headers: { 'User-Agent': 'RM API Client Nodejs' }
+    });
+    var openApiInstance = axios_1.default.create({
+        baseURL: openApiUrl,
+        timeout: config.timeout,
+        headers: { 'User-Agent': 'RM API Client Nodejs' }
+    });
+    return {
+        timeout: config.timeout,
+        isProduction: config.isProduction,
+        clientId: config.clientId,
+        clientSecret: config.clientSecret,
+        oauthInstance: oauthInstance,
+        openApiInstance: openApiInstance,
         getClientCredentials: credentials_1.getClientCredentials,
         refreshToken: credentials_1.refreshToken,
     };
 }
-exports.init = init;
-var APIClient = init();
-APIClient.clientId = '2948617732362532265';
-APIClient.clientSecret = 'tuWQGvIeqQbJdwxVcLREkYOLBLemzVJJ';
+exports.RMSDK = RMSDK;
+//////////
+var SDK = RMSDK({
+    clientId: '5499912462549392881',
+    clientSecret: 'pwMapjZzHljBALIGHxfGGXmiGLxjWbkT'
+});
 (function () { return __awaiter(_this, void 0, void 0, function () {
     var a, b;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, APIClient.getClientCredentials()];
+            case 0: return [4 /*yield*/, SDK.getClientCredentials()];
             case 1:
                 a = _a.sent();
-                return [4 /*yield*/, APIClient.refreshToken(a.refreshToken)];
+                return [4 /*yield*/, SDK.refreshToken(a.refreshToken)];
             case 2:
                 b = _a.sent();
                 console.log(b);
