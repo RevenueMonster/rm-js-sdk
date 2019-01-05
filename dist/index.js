@@ -36,9 +36,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var fs = require("fs");
 var axios_1 = require("axios");
 var lodash_1 = require("lodash");
 var credentials_1 = require("./credentials");
+var signature_1 = require("./signature");
 function RMSDK(instanceConfig) {
     var defaults = {
         timeout: 2000,
@@ -76,23 +78,23 @@ function RMSDK(instanceConfig) {
 }
 exports.RMSDK = RMSDK;
 //////////
-var SDK = RMSDK({
-    clientId: '5499912462549392881',
-    clientSecret: 'pwMapjZzHljBALIGHxfGGXmiGLxjWbkT'
-});
+// const SDK = RMSDK({
+//   clientId: '5499912462549392881',
+//   clientSecret: 'pwMapjZzHljBALIGHxfGGXmiGLxjWbkT'
+// });
 (function () { return __awaiter(_this, void 0, void 0, function () {
-    var a, b;
+    var privateKey;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, SDK.getClientCredentials()];
-            case 1:
-                a = _a.sent();
-                return [4 /*yield*/, SDK.refreshToken(a.refreshToken)];
-            case 2:
-                b = _a.sent();
-                console.log(b);
-                return [2 /*return*/];
-        }
+        privateKey = Buffer.from(fs.readFileSync('src/private.pem')).toString();
+        console.log(signature_1.generateSignature({
+            data: { b: true, a: 1 },
+            requestUrl: 'www.google.com',
+            signType: 'sha256',
+            nonceStr: '123',
+            method: 'get',
+            timestamp: '123'
+        }, privateKey));
+        return [2 /*return*/];
     });
 }); })();
 //# sourceMappingURL=index.js.map

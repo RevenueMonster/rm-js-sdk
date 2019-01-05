@@ -1,7 +1,9 @@
-import axios, { AxiosInstance } from 'axios';
+import fs = require('fs')
+import axios, { AxiosInstance } from 'axios'
 import { merge } from 'lodash'
 
-import { getClientCredentials, refreshToken } from "./credentials";
+import { getClientCredentials, refreshToken } from "./credentials"
+import { generateSignature } from './signature'
 
 interface config {
   timeout?: number
@@ -68,14 +70,24 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
 
 //////////
 
-const SDK = RMSDK({
-  clientId: '5499912462549392881',
-  clientSecret: 'pwMapjZzHljBALIGHxfGGXmiGLxjWbkT'
-});
+// const SDK = RMSDK({
+//   clientId: '5499912462549392881',
+//   clientSecret: 'pwMapjZzHljBALIGHxfGGXmiGLxjWbkT'
+// });
 
 (async () => {
-  const a = await SDK.getClientCredentials();
+  const privateKey = Buffer.from(fs.readFileSync('src/private.pem')).toString()
+
+  console.log(generateSignature({
+    data: {b: true, a: 1},
+    requestUrl: 'www.google.com',
+    signType: 'sha256',
+    nonceStr: '123',
+    method: 'get',
+    timestamp: '123'
+  }, privateKey))
+  // const a = await SDK.getClientCredentials();
   // console.log(a);
-  const b = await SDK.refreshToken(a.refreshToken)
-  console.log(b)
+  // const b = await SDK.refreshToken(a.refreshToken)
+  // console.log(b)
 })();
