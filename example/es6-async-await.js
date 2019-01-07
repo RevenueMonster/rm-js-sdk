@@ -1,4 +1,7 @@
-const RMSDK = require('../dist')
+const fs = require('fs')
+
+const { RMSDK } = require('../dist')
+// or `const RMSDK = require('../dist').RMSDK`
 
 async function main() {
     const privateKey = Buffer.from(fs.readFileSync('src/private.pem')).toString()
@@ -10,7 +13,12 @@ async function main() {
     });
   
     const resp0 = await SDK.getClientCredentials()
-    const resp1 = await SDK.createTransactionUrl(resp0.accessToken, {
+    const resp1 = await SDK.getMerchantProfile(resp0.accessToken)
+    console.log(resp1)
+    const resp2 = await SDK.getMerchantSubscriptions(resp0.accessToken)
+    console.log(resp2)
+
+    const resp3 = await SDK.createTransactionUrl(resp0.accessToken, {
       amount: 100,
       currencyType: 'MYR',
       expiry: { type: 'PERMANENT' },
@@ -24,10 +32,10 @@ async function main() {
       storeId: '1981039839353524638',
       type: 'DYNAMIC',
     })
-    const resp2 = await SDK.getTransactionUrlByCode(resp0.accessToken, resp1.item.code)
-    console.log(resp2)
-    const resp3 = await SDK.getTransactionsByCode(resp0.accessToken, resp1.item.code)
-    console.log(resp3)
+    const resp4 = await SDK.getTransactionUrlByCode(resp0.accessToken, resp3.item.code)
+    console.log(resp4)
+    const resp5 = await SDK.getTransactionsByCode(resp0.accessToken, resp3.item.code)
+    console.log(resp5)
 }
 
 main()

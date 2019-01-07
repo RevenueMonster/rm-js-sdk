@@ -1,4 +1,3 @@
-import fs = require('fs')
 import axios, { AxiosInstance } from 'axios'
 import { merge } from 'lodash'
 
@@ -9,6 +8,7 @@ import {
   getTransactionUrlByCode,
   getTransactionsByCode
 } from './payment'
+import { getMerchantProfile, getMerchantSubscriptions } from './merchant';
 // import { sortedObject, generateSignature } from './signature'
 
 interface config {
@@ -34,8 +34,10 @@ export interface RMSDKInstance {
 
   getClientCredentials: () => Promise<any>,
   refreshToken: (refreshToken: string) => Promise<any>,
+  getMerchantProfile: (accessToken: string) => Promise<any>,
+  getMerchantSubscriptions: (accessToken: string) => Promise<any>,
   createTransactionUrl: (acessToken: string, data: object) => Promise<any>,
-  getTransactionUrl: (accesToken: string) => Promise<any>,
+  getTransactionUrl: (accessToken: string) => Promise<any>,
   getTransactionUrlByCode: (accessToken: string, code: string) => Promise<any>,
   getTransactionsByCode: (accessToken: string, code: string) => Promise<any>,
 }
@@ -91,9 +93,13 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
 
     getClientCredentials,
     refreshToken,
+    getMerchantProfile,
+    getMerchantSubscriptions,
     createTransactionUrl,
     getTransactionUrl,
     getTransactionUrlByCode,
     getTransactionsByCode,
   }
 }
+
+export default RMSDK
