@@ -8,7 +8,8 @@ import {
   getTransactionUrlByCode,
   getTransactionsByCode
 } from './payment'
-import { getMerchantProfile, getMerchantSubscriptions } from './merchant';
+import { getMerchantProfile, getMerchantSubscriptions } from './merchant'
+import { getUserProfile } from './user'
 // import { sortedObject, generateSignature } from './signature'
 
 interface config {
@@ -37,6 +38,7 @@ export interface RMSDKInstance {
   getMerchantProfile: (accessToken: string) => Promise<any>,
   getMerchantSubscriptions: (accessToken: string) => Promise<any>,
   createTransactionUrl: (acessToken: string, data: object) => Promise<any>,
+  getUserProfile: (accessToken: string) => Promise<any>,
   getTransactionUrl: (accessToken: string) => Promise<any>,
   getTransactionUrlByCode: (accessToken: string, code: string) => Promise<any>,
   getTransactionsByCode: (accessToken: string, code: string) => Promise<any>,
@@ -95,6 +97,7 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
     refreshToken,
     getMerchantProfile,
     getMerchantSubscriptions,
+    getUserProfile,
     createTransactionUrl,
     getTransactionUrl,
     getTransactionUrlByCode,

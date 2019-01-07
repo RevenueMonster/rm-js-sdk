@@ -36,6 +36,9 @@ async function main() {
     console.log(resp4)
     const resp5 = await SDK.getTransactionsByCode(resp0.accessToken, resp3.item.code)
     console.log(resp5)
+
+    const resp6 = await SDK.getUserProfile(resp0.accessToken)
+    console.log(resp6)
 }
 
 main()
