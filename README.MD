@@ -1,0 +1,98 @@
+# API-SDK-Nodejs
+This is an Nodejs SDK that maps some of the RESTful methods of Open API that are documented at [doc.revenuemonster.my](https://doc.revenuemonster.my/).
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+
+### Prerequisites
+
+
+
+### Installing
+
+
+
+### Covered API
+* Signature Algorithm
+* Client Credentials (Authentication)
+* Refresh Token (Authentication)
+* Payment (Quick Pay) - Payment
+* Payment (Quick Pay) - Refund
+* Payment (Quick Pay) - Reverse
+* Payment (Quick Pay) - Get All Payment Transactions
+* Payment (Quick Pay) - Get Payment Transaction By ID
+* Payment (Quick Pay) - Get Payment Transaction By Order ID
+* Payment (Quick Pay) - Daily Settlement Report
+
+
+### Usage
+1. Get Client ID and Client Secret from portal.
+![ClientIDClientSecret](https://storage.googleapis.com/rm-portal-assets/img/rm-landing/clientIDclientSecret.png)
+2. Generate private key and publci key from portal. 
+![PrivateKeyPublicKey](https://storage.googleapis.com/rm-portal-assets/img/rm-landing/privateKeypublicKey.PNG)
+3. Store private key for own use and public key at portal.
+![PastePublicKey](https://storage.googleapis.com/rm-portal-assets/img/rm-landing/pastePublicKey.png)
+
+
+* Client SDK Config
+    * default SDK config object 
+```
+const SDK = RMSDK({
+    clientId: '',
+    clientSecret: '',
+    privateKey: '',
+    isProduction: false,
+    timeout: 2000,
+  });
+```
+
+* Client Credentials (Authentication)
+    * To get refresh token and access token(expired after 2 hours) with using provided clientId and clientSecret
+```
+var result = await SDK.getClientCredentials();
+```
+
+* Refresh Token (Authentication)
+    * To get new access token(expired after 2 hours) with using provided clientId and clientSecret (recommended to schedule to run this fucntion on every less than 2 hours) in order to avoid expired access token error.
+```
+var result = await SDK.refreshToken(refreshToken);
+```
+
+* Payment (Quick Pay) - Payment
+    * To make payment by scanning barcode/authcode from user
+```
+var data = new
+{
+    authCode = "161583080660761280", //get from user payment barcode
+    order = new { 
+                  amount = 100, currencyType = "MYR", id = "12345678131", 
+                  title = "title", detail = "desc", additionalData = "API Test" 
+                },
+   ipAddress = "127.0.0.1",
+   storeId = "123412341234", 
+};
+var result = await SDK.quickPayCreate(accessToken, data);
+```
+
+* Payment (Quick Pay) - Refund
+    * To refund the successful transactions 
+```
+var data = new
+{
+   transactionId = "181203100634010427614646", // get from user's transaction 
+   refund = new { type = "FULL", currencyType = "MYR", amount = 100 },
+   reason = "test",
+};
+var result = await SDK.quickPayRefund(accessToken, data);
+```
+
+* Payment (Quick Pay) - Reverse
+    * To reverse time-out or problematic transaction
+```
+var data = new
+{
+    orderId = "12345678131",
+};
+var result = await SDK.quickPayReverse(accessToken, data);
+```
