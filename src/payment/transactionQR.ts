@@ -1,6 +1,6 @@
 import crypto = require('crypto')
-import { RMSDKInstance } from ".";
-import { generateSignature } from "./signature";
+import { RMSDKInstance } from '../'
+import { generateSignature } from '../signature'
 
 export function createTransactionUrl(this: RMSDKInstance, accessToken: string, data: object) {
     const nonceStr = crypto.randomBytes(32).toString('hex')

@@ -3,11 +3,20 @@ import { merge } from 'lodash'
 
 import { getClientCredentials, refreshToken } from './credentials'
 import {
+  initQuickPay,
+  refund,
+  reverse,
+  getPaymentTransactions,
+  getPaymentTransactionById,
+  getPaymentTransactionByOrderId,
+  getDailySettlementReport,
+} from './payment/quickPay'
+import {
   createTransactionUrl,
   getTransactionUrl,
   getTransactionUrlByCode,
-  getTransactionsByCode
-} from './payment'
+  getTransactionsByCode,
+} from './payment/transactionQR'
 import { getMerchantProfile, getMerchantSubscriptions } from './merchant'
 import { getUserProfile } from './user'
 import {
@@ -54,12 +63,22 @@ export interface RMSDKInstance {
 
   getUserProfile: (accessToken: string) => Promise<any>,
 
-  createTransactionUrl: (acessToken: string, data: object) => Promise<any>,
-  getTransactionUrl: (accessToken: string) => Promise<any>,
-  getTransactionUrlByCode: (accessToken: string, code: string) => Promise<any>,
-  getTransactionsByCode: (accessToken: string, code: string) => Promise<any>,
-
   giveLoyaltyPoint: (accessToken: string, data: ILoyaltyRewardArg) => Promise<any>,
+
+  Payment: {
+    initQuickPay: (acessToken: string, data: object) => Promise<any>,
+    refund: (acessToken: string, data: object) => Promise<any>,
+    reverse: (acessToken: string, data: object) => Promise<any>,
+    getPaymentTransactions: (acessToken: string) => Promise<any>,
+    getPaymentTransactionById: (acessToken: string, Id: string) => Promise<any>,
+    getPaymentTransactionByOrderId:(acessToken: string, orderId: string) => Promise<any>,
+    getDailySettlementReport:(acessToken: string, data: object) => Promise<any>, 
+
+    createTransactionUrl: (acessToken: string, data: object) => Promise<any>,
+    getTransactionUrl: (accessToken: string) => Promise<any>,
+    getTransactionUrlByCode: (accessToken: string, code: string) => Promise<any>,
+    getTransactionsByCode: (accessToken: string, code: string) => Promise<any>,
+  }
 }
 
 export function RMSDK(instanceConfig?: config): RMSDKInstance {
@@ -126,10 +145,20 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
 
     getUserProfile,
     
-    createTransactionUrl,
-    getTransactionUrl,
-    getTransactionUrlByCode,
-    getTransactionsByCode,
+    Payment: {
+      initQuickPay,
+      refund,
+      reverse,
+      getPaymentTransactions,
+      getPaymentTransactionById,
+      getPaymentTransactionByOrderId,
+      getDailySettlementReport,
+
+      createTransactionUrl,
+      getTransactionUrl,
+      getTransactionUrlByCode,
+      getTransactionsByCode,
+    },
 
     giveLoyaltyPoint
   }
