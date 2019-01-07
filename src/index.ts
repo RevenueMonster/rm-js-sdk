@@ -10,7 +10,13 @@ import {
 } from './payment'
 import { getMerchantProfile, getMerchantSubscriptions } from './merchant'
 import { getUserProfile } from './user'
-// import { sortedObject, generateSignature } from './signature'
+import {
+  getStores,
+  getStoreById,
+  createStore,
+  updateStore,
+  deleteStore
+} from './store';
 
 interface config {
   timeout?: number
@@ -35,10 +41,19 @@ export interface RMSDKInstance {
 
   getClientCredentials: () => Promise<any>,
   refreshToken: (refreshToken: string) => Promise<any>,
+
   getMerchantProfile: (accessToken: string) => Promise<any>,
   getMerchantSubscriptions: (accessToken: string) => Promise<any>,
-  createTransactionUrl: (acessToken: string, data: object) => Promise<any>,
+
+  getStores: (accessToken: string) => Promise<any>,
+  getStoreById: (accessToken: string, storeId: string) => Promise<any>,
+  createStore: (accessToken: string, data: object) => Promise<any>,
+  updateStore: (accessToken: string, storeId: string, data: object) => Promise<any>,
+  deleteStore: (accessToken: string, storeId: string) => Promise<any>,
+
   getUserProfile: (accessToken: string) => Promise<any>,
+
+  createTransactionUrl: (acessToken: string, data: object) => Promise<any>,
   getTransactionUrl: (accessToken: string) => Promise<any>,
   getTransactionUrlByCode: (accessToken: string, code: string) => Promise<any>,
   getTransactionsByCode: (accessToken: string, code: string) => Promise<any>,
@@ -93,11 +108,21 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
     oauthInstance,
     openApiInstance,
 
+
     getClientCredentials,
     refreshToken,
+    
     getMerchantProfile,
     getMerchantSubscriptions,
+    
+    getStores,
+    getStoreById,
+    createStore,
+    updateStore,
+    deleteStore,
+
     getUserProfile,
+    
     createTransactionUrl,
     getTransactionUrl,
     getTransactionUrlByCode,
