@@ -32,12 +32,16 @@ export function generateSignature(arg: {
     timestamp: string,
 }, privateKey: string): string {
 
-    const signature_body = sortedObject(arg.data)
-    const signature = Buffer.from(JSON.stringify(signature_body)).toString('base64')
+    let signature_data = ''
 
-    const full_signature = ''
-    + 'data=' + signature
-    + '&method=' + arg.method
+    if (!!arg.data) {
+        const signature_body = sortedObject(arg.data)
+        const signature = Buffer.from(JSON.stringify(signature_body)).toString('base64')
+        signature_data = 'data=' + signature + '&'
+    }
+
+    const full_signature = signature_data
+    + 'method=' + arg.method
     + '&nonceStr=' + arg.nonceStr
     + '&requestUrl=' + arg.requestUrl
     + '&signType=' + arg.signType

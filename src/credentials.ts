@@ -6,10 +6,6 @@ import { RMSDKInstance } from '.';
  * will return null if clientId and clientSecret incorrect
  */
 export function getClientCredentials(this: RMSDKInstance) {
-    if (!this.clientId || !this.clientSecret) {
-        return null
-    }
-
     const basic = this.clientId + ':' + this.clientSecret
     const basic_signature = Buffer.from(basic).toString('base64')
 
