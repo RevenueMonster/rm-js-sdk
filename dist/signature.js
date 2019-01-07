@@ -2,10 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var crypto = require("crypto");
 var lodash_1 = require("lodash");
-function generateSignature(arg, privateKey) {
-    var keys = Object.keys(arg.data);
+function sortObject(obj) {
+    var keys = Object.keys(obj);
     var sortedKeys = lodash_1.sortBy(keys);
-    var signature_body = lodash_1.fromPairs(lodash_1.map(sortedKeys, function (key) { return [key, arg.data[key]]; }));
+    return lodash_1.fromPairs(lodash_1.map(sortedKeys, function (key) { return [key, obj[key]]; }));
+}
+function generateSignature(arg, privateKey) {
+    var signature_body = sortObject(arg.data);
     var signature = Buffer.from(JSON.stringify(signature_body)).toString('base64');
     var full_signature = ''
         + 'data=' + signature
@@ -14,8 +17,10 @@ function generateSignature(arg, privateKey) {
         + '&requestUrl=' + arg.requestUrl
         + '&signType=' + arg.signType
         + '&timestamp=' + arg.timestamp;
-    console.log(full_signature);
-    return crypto.createHmac('sha256', privateKey).update(full_signature).digest('base64');
+    return crypto
+        .createSign('SHA256')
+        .update(full_signature)
+        .sign(privateKey, 'base64');
 }
 exports.generateSignature = generateSignature;
 //# sourceMappingURL=signature.js.map

@@ -1,4 +1,4 @@
-import { RMSDKInstance } from './index';
+import { RMSDKInstance } from '.';
 /**
  * Get client credential (Authentication)
  * will return null if clientId and clientSecret incorrect

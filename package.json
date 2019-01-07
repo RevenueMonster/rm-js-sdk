@@ -13,11 +13,13 @@
   },
   "scripts": {
     "build": "tsc",
-    "watch": "tsc --watch"
+    "watch": "concurrently \"tsc --watch\" \"nodemon dist/index.js\""
   },
   "devDependencies": {
     "@types/lodash": "^4.14.119",
     "@types/node": "^10.12.18",
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.18.9",
     "typescript": "^3.2.2"
   }
 }

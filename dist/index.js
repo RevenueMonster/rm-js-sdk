@@ -40,21 +40,22 @@ var fs = require("fs");
 var axios_1 = require("axios");
 var lodash_1 = require("lodash");
 var credentials_1 = require("./credentials");
-var signature_1 = require("./signature");
+var payment_1 = require("./payment");
 function RMSDK(instanceConfig) {
     var defaults = {
         timeout: 2000,
         isProduction: false,
         clientId: '',
         clientSecret: '',
+        privateKey: '',
     };
     var config = lodash_1.merge(defaults, instanceConfig);
     var oauthUrl = config.isProduction
         ? 'https://oauth.revenuemonster.my/v1'
         : 'https://sb-oauth.revenuemonster.my/v1';
     var openApiUrl = config.isProduction
-        ? 'https://open.revenuemonster.my/v1'
-        : 'https://sb-open.revenuemonster.my/v1';
+        ? 'https://open.revenuemonster.my/v3'
+        : 'https://sb-open.revenuemonster.my/v3';
     var oauthInstance = axios_1.default.create({
         baseURL: oauthUrl,
         timeout: config.timeout,
@@ -70,31 +71,52 @@ function RMSDK(instanceConfig) {
         isProduction: config.isProduction,
         clientId: config.clientId,
         clientSecret: config.clientSecret,
+        privateKey: config.privateKey,
+        oauthUrl: oauthUrl,
+        openApiUrl: openApiUrl,
         oauthInstance: oauthInstance,
         openApiInstance: openApiInstance,
         getClientCredentials: credentials_1.getClientCredentials,
         refreshToken: credentials_1.refreshToken,
+        createTransactionUrl: payment_1.createTransactionUrl,
     };
 }
 exports.RMSDK = RMSDK;
 //////////
-// const SDK = RMSDK({
-//   clientId: '5499912462549392881',
-//   clientSecret: 'pwMapjZzHljBALIGHxfGGXmiGLxjWbkT'
-// });
 (function () { return __awaiter(_this, void 0, void 0, function () {
-    var privateKey;
+    var privateKey, SDK, a, data, resp;
     return __generator(this, function (_a) {
-        privateKey = Buffer.from(fs.readFileSync('src/private.pem')).toString();
-        console.log(signature_1.generateSignature({
-            data: { b: true, a: 1 },
-            requestUrl: 'www.google.com',
-            signType: 'sha256',
-            nonceStr: '123',
-            method: 'get',
-            timestamp: '123'
-        }, privateKey));
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0:
+                privateKey = Buffer.from(fs.readFileSync('src/private.pem')).toString();
+                SDK = RMSDK({
+                    clientId: '5499912462549392881',
+                    clientSecret: 'pwMapjZzHljBALIGHxfGGXmiGLxjWbkT',
+                    privateKey: privateKey,
+                });
+                return [4 /*yield*/, SDK.getClientCredentials()];
+            case 1:
+                a = _a.sent();
+                data = {
+                    amount: 100,
+                    currencyType: 'MYR',
+                    expiry: { type: 'PERMENANT' },
+                    isPreFillAmount: true,
+                    method: ['WECHATPAY'],
+                    order: {
+                        details: 'detail AAA',
+                        title: 'title BBB',
+                    },
+                    redirectUrl: 'https://www.google.com',
+                    storeId: '1981039839353524638',
+                    type: 'DYNAMIC',
+                };
+                return [4 /*yield*/, SDK.createTransactionUrl(a.accessToken, data)];
+            case 2:
+                resp = _a.sent();
+                console.log(resp);
+                return [2 /*return*/];
+        }
     });
 }); })();
 //# sourceMappingURL=index.js.map

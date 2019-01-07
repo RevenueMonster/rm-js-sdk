@@ -1,5 +1,5 @@
 import { Buffer } from 'buffer';
-import { RMSDKInstance } from './index';
+import { RMSDKInstance } from '.';
 
 /**
  * Get client credential (Authentication)

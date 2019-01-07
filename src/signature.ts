@@ -1,6 +1,13 @@
 import crypto = require('crypto');
 import { map, sortBy, fromPairs } from 'lodash'
 
+function sortObject(obj: any): object {
+    const keys = Object.keys(obj)
+    const sortedKeys = sortBy(keys)
+    
+    return fromPairs(map(sortedKeys, (key: string) => [ key, obj[key] ]))
+}
+
 export function generateSignature(arg: {
     data: any,
     requestUrl: string,
@@ -9,10 +16,8 @@ export function generateSignature(arg: {
     method: string,
     timestamp: string,
 }, privateKey: string): string {
-    const keys = Object.keys(arg.data)
-    const sortedKeys = sortBy(keys)
-    const signature_body = fromPairs(map(sortedKeys, (key: string) => [ key, arg.data[key] ]))
 
+    const signature_body = sortObject(arg.data)
     const signature = Buffer.from(JSON.stringify(signature_body)).toString('base64')
 
     const full_signature = ''
@@ -24,7 +29,7 @@ export function generateSignature(arg: {
     + '&timestamp=' + arg.timestamp
 
     return crypto
-        .createHmac('sha256', privateKey)
+        .createSign('SHA256')
         .update(full_signature)
-        .digest('base64')
+        .sign(privateKey, 'base64')
 }
