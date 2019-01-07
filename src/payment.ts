@@ -1,19 +1,19 @@
 import crypto = require('crypto')
 import { RMSDKInstance } from ".";
-import { generateSignature } from "./signature";
+import { generateSignature, sortedObject } from "./signature";
 
 export function createTransactionUrl(this: RMSDKInstance, accessToken: string, data: object) {
-    const nonceStr = crypto.randomBytes(20).toString('hex')
+    const nonceStr = crypto.randomBytes(32).toString('hex')
     const timestamp = new Date().getTime().toString()
-
+    
     return this.openApiInstance({
         url: '/payment/transaction/qrcode',
         method: 'post',
-        data,
+        data: sortedObject(data),
         headers: {
-            Authorization: 'Bearer ' + accessToken,
+            'Authorization': 'Bearer ' + accessToken,
             'X-Timestamp': timestamp,
-            'X-NonceStr': nonceStr,
+            'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + generateSignature({
                 data,
                 requestUrl: this.openApiUrl + '/payment/transaction/qrcode',
@@ -25,5 +25,5 @@ export function createTransactionUrl(this: RMSDKInstance, accessToken: string, d
         }
     })
     .then(x => x.data)
-    .catch(err => console.error(err.response))
+    .catch(err => console.error(err))
 }

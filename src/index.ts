@@ -4,6 +4,7 @@ import { merge } from 'lodash'
 
 import { getClientCredentials, refreshToken } from './credentials'
 import { createTransactionUrl } from './payment'
+// import { sortedObject, generateSignature } from './signature'
 
 interface config {
   timeout?: number
@@ -52,14 +53,23 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
   const oauthInstance = axios.create({
     baseURL: oauthUrl,
     timeout: config.timeout,
-    headers: { 'User-Agent': 'RM API Client Nodejs' }
+    headers: { 'User-Agent': 'RM API Client Nodejs', 'Content-Type': 'application/json' }
   })
 
   const openApiInstance = axios.create({
     baseURL: openApiUrl,
     timeout: config.timeout,
-    headers: { 'User-Agent': 'RM API Client Nodejs' }
+    headers: { 'User-Agent': 'RM API Client Nodejs', 'Content-Type': 'application/json' }
   })
+
+  openApiInstance.interceptors.request.use(function (config) {
+    // Do something before request is sent
+    console.log(config)
+    return config;
+  }, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  });
 
   return {
     timeout: config.timeout,
@@ -94,9 +104,9 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
   });
 
   const a = await SDK.getClientCredentials();
-  // console.log(a);
-  // const b = await SDK.refreshToken(a.refreshToken)
-  // console.log(b)
+  // // console.log(a);
+  // // const b = await SDK.refreshToken(a.refreshToken)
+  // // console.log(b)
 
   const data = {
     amount: 100,
@@ -113,6 +123,17 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
     type: 'DYNAMIC',
   }
 
-  const resp = await SDK.createTransactionUrl(a.accessToken, data)
-  console.log(resp)
+  // const data = {b: true, a: 1}
+  // console.log(JSON.stringify(sortedObject(data)))
+  // console.log(generateSignature({
+  //   data,
+  //   requestUrl: 'https://sb-open.revenuemonster.my/v3/payment/transaction/qrcode',
+  //   signType: 'sha256',
+  //   nonceStr: '123',
+  //   method: 'get',
+  //   timestamp: '123'
+  // }, privateKey))
+  // console.log(JSON.stringify(sortedObject(data)))
+  await SDK.createTransactionUrl(a.accessToken, data)
+  // // console.log(resp)
 })();
