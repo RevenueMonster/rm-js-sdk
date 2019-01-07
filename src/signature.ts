@@ -32,17 +32,29 @@ export function generateSignature(arg: {
     timestamp: string,
 }, privateKey: string): string {
 
-    const signature_body = sortedObject(arg.data)
-    const signature = Buffer.from(JSON.stringify(signature_body)).toString('base64')
+    let full_signature;
 
-    const full_signature = ''
-    + 'data=' + signature
-    + '&method=' + arg.method
-    + '&nonceStr=' + arg.nonceStr
-    + '&requestUrl=' + arg.requestUrl
-    + '&signType=' + arg.signType
-    + '&timestamp=' + arg.timestamp
+    if(Object.keys(arg.data).length !== 0) {
+        const signature_body = sortedObject(arg.data)
+        const signature = Buffer.from(JSON.stringify(signature_body)).toString('base64')
 
+        full_signature = ''
+        + 'data=' + signature
+        + '&method=' + arg.method
+        + '&nonceStr=' + arg.nonceStr
+        + '&requestUrl=' + arg.requestUrl
+        + '&signType=' + arg.signType
+        + '&timestamp=' + arg.timestamp
+
+    } else {
+        full_signature = ''
+        + 'method=' + arg.method
+        + '&nonceStr=' + arg.nonceStr
+        + '&requestUrl=' + arg.requestUrl
+        + '&signType=' + arg.signType
+        + '&timestamp=' + arg.timestamp
+    }
+    
     return crypto
         .createSign('SHA256')
         .update(full_signature)

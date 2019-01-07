@@ -3,7 +3,16 @@ import axios, { AxiosInstance } from 'axios'
 import { merge } from 'lodash'
 
 import { getClientCredentials, refreshToken } from './credentials'
-import { createTransactionUrl } from './payment'
+import { 
+  createTransactionUrl,
+  quickPayCreate,
+  quickPayRefund,
+  quickPayReverse,
+  quickPayGetPaymentTransactions,
+  quickPayGetPaymentTransactionByID,
+  quickPayGetPaymentTransactionByOrderID,
+  quickPayGetDailySettlementReport
+} from './payment'
 // import { sortedObject, generateSignature } from './signature'
 
 interface config {
@@ -30,6 +39,15 @@ export interface RMSDKInstance {
   getClientCredentials: () => Promise<any> | null,
   refreshToken: (refreshToken: string) => Promise<any>,
   createTransactionUrl: (acessToken: string, data: object) => Promise<any>,
+
+
+  quickPayCreate: (acessToken: string, data: object) => Promise<any>,
+  quickPayRefund: (acessToken: string, data: object) => Promise<any>,
+  quickPayReverse: (acessToken: string, data: object) => Promise<any>,
+  quickPayGetPaymentTransactions: (acessToken: string) => Promise<any>,
+  quickPayGetPaymentTransactionByID: (acessToken: string, Id: string) => Promise<any>,
+  quickPayGetPaymentTransactionByOrderID:(acessToken: string, orderId: string) => Promise<any>,
+  quickPayGetDailySettlementReport:(acessToken: string, data: object) => Promise<any>,
 }
 
 export function RMSDK(instanceConfig?: config): RMSDKInstance {
@@ -87,6 +105,14 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
     getClientCredentials,
     refreshToken,
     createTransactionUrl,
+
+    quickPayCreate,
+    quickPayRefund,
+    quickPayReverse,
+    quickPayGetPaymentTransactions,
+    quickPayGetPaymentTransactionByID,
+    quickPayGetPaymentTransactionByOrderID,
+    quickPayGetDailySettlementReport
   }
 }
 
@@ -104,24 +130,24 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
   });
 
   const a = await SDK.getClientCredentials();
-  // // console.log(a);
+  console.log(a);
   // // const b = await SDK.refreshToken(a.refreshToken)
   // // console.log(b)
 
-  const data = {
-    amount: 100,
-    currencyType: 'MYR',
-    expiry: { type: 'PERMENANT' },
-    isPreFillAmount: true,
-    method: ['WECHATPAY'],
-    order: {
-      details: 'detail AAA',
-      title: 'title BBB',
-    },
-    redirectUrl: 'https://www.google.com',
-    storeId: '1981039839353524638',
-    type: 'DYNAMIC',
-  }
+  // const data = {
+  //   amount: 100,
+  //   currencyType: 'MYR',
+  //   expiry: { type: 'PERMANENT' },
+  //   isPreFillAmount: true,
+  //   method: ['WECHATPAY'],
+  //   order: {
+  //     details: 'detail AAA',
+  //     title: 'title BBB',
+  //   },
+  //   redirectUrl: 'https://www.google.com',
+  //   storeId: '1981039839353524638',
+  //   type: 'DYNAMIC',
+  // }
 
   // const data = {b: true, a: 1}
   // console.log(JSON.stringify(sortedObject(data)))
@@ -134,6 +160,95 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
   //   timestamp: '123'
   // }, privateKey))
   // console.log(JSON.stringify(sortedObject(data)))
-  await SDK.createTransactionUrl(a.accessToken, data)
-  // // console.log(resp)
+  // const resp = await SDK.createTransactionUrl(a.accessToken, data)
+  // console.log(resp)
+
+
+
+
+  ////// ----------------------quickPay QR (create)----------------------//////
+
+  // const quickPayQrCreateData = {
+  // authCode:"161746337888726240",
+  // order:{ 
+  //   amount:100,
+  //   currencyType: "MYR",
+  //   id: "12344333233452",
+  //   title:"title",
+  //   detail:"desc",
+  //   additonalData:"API Test"
+  // },
+  //   ipAddress:"175.143.101.229",
+  //   storeId:"1331862367915081341"
+  // }
+  // // 190107081314010421633199
+
+  // const resp = await SDK.quickPayCreate(a.accessToken, quickPayQrCreateData)
+  // console.log(resp)
+
+
+
+
+  ////// ----------------------quickPay QR (refund)----------------------//////
+
+  // const quickPayQrRefundData = {
+  //   transactionId: "190107081314010421633199",
+  //   refund: {
+  //     type: "FULL",
+  //     currencyType: "MYR",
+  //     amount: 100
+  //   },
+  //   reason: "test"
+  // }
+  // const resp = await SDK.quickPayRefund(a.accessToken, quickPayQrRefundData)
+  // console.log(resp)
+
+
+
+
+  ////// ----------------------quickPay QR (reverse)----------------------//////
+
+  // const quickPayQrReverseData = {
+  //   orderId: "12344333233452"
+  // }
+  // const resp = await SDK.quickPayReverse(a.accessToken, quickPayQrReverseData)
+  // console.log(resp)
+
+
+
+
+  ////// ----------------------quickPay QR (get payment trasnactions)----------------------//////
+
+  // const resp1 = await SDK.quickPayGetPaymentTransactions(a.accessToken)
+  // console.log(resp1)
+
+
+
+
+
+  ////// ----------------------quickPay QR (get payment trasnaction by ID)----------------------//////
+
+  // const resp2 = await SDK.quickPayGetPaymentTransactionByID(a.accessToken,'190103084646010324970256' )
+  // console.log(resp2)
+
+
+
+
+
+  ////// ----------------------quickPay QR (get payment trasnaction by OrderID)----------------------//////
+
+  // const resp2 = await SDK.quickPayGetPaymentTransactionByOrderID(a.accessToken,'12344333233452' )
+  // console.log(resp2)
+
+
+  ////// ----------------------quickPay QR (get daily settlement report)----------------------//////
+
+  // const quickPayQrDailySettlementReport = {
+  //   date: "2019-01-06",
+  //   method: "WECHATPAY",
+  //   region: "MALAYSIA",
+  //   sequence: 1
+  // }
+  // const resp = await SDK.quickPayGetDailySettlementReport(a.accessToken, quickPayQrDailySettlementReport)
+  // console.log(resp)
 })();
