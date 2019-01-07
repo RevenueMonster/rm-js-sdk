@@ -14,8 +14,10 @@ function generateSignature(arg, privateKey) {
         + '&requestUrl=' + arg.requestUrl
         + '&signType=' + arg.signType
         + '&timestamp=' + arg.timestamp;
-    console.log(full_signature);
-    return crypto.createHmac('sha256', privateKey).update(full_signature).digest('base64');
+    return crypto
+        .createHmac('sha256', privateKey)
+        .update(full_signature)
+        .digest('base64');
 }
 exports.generateSignature = generateSignature;
 //# sourceMappingURL=signature.js.map

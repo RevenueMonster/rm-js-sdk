@@ -4,6 +4,7 @@ import { merge } from 'lodash'
 
 import { getClientCredentials, refreshToken } from "./credentials"
 import { generateSignature } from './signature'
+import { quickPay } from "./payment/quickPay"
 
 interface config {
   timeout?: number
@@ -20,6 +21,8 @@ export interface RMSDKInstance {
 
   oauthInstance: AxiosInstance,
   openApiInstance: AxiosInstance,
+
+  quickPay: () => Promise<any> | null,
 
   getClientCredentials: () => Promise<any> | null,
   refreshToken: (refreshToken: string) => Promise<any>,
@@ -65,6 +68,8 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
 
     getClientCredentials,
     refreshToken,
+
+    quickPay
   }
 }
 
@@ -78,6 +83,11 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
 (async () => {
   const privateKey = Buffer.from(fs.readFileSync('src/private.pem')).toString()
 
+  const SDK = RMSDK({
+    clientId: '5499912462549392881',
+    clientSecret: 'pwMapjZzHljBALIGHxfGGXmiGLxjWbkT',
+  })
+
   console.log(generateSignature({
     data: {b: true, a: 1},
     requestUrl: 'www.google.com',
@@ -86,8 +96,10 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
     method: 'get',
     timestamp: '123'
   }, privateKey))
-  // const a = await SDK.getClientCredentials();
-  // console.log(a);
-  // const b = await SDK.refreshToken(a.refreshToken)
+
+  const a = await SDK.getClientCredentials();
+  console.log(a.data.error);
+
+  // const b = await SDK.quickPay()
   // console.log(b)
 })();

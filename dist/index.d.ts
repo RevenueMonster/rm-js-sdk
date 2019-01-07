@@ -12,6 +12,7 @@ export interface RMSDKInstance {
     clientSecret: string;
     oauthInstance: AxiosInstance;
     openApiInstance: AxiosInstance;
+    quickPay: () => Promise<any> | null;
     getClientCredentials: () => Promise<any> | null;
     refreshToken: (refreshToken: string) => Promise<any>;
 }
