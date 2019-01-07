@@ -98,8 +98,8 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
   }, privateKey))
 
   const a = await SDK.getClientCredentials();
-  console.log(a.data.error);
+  console.log(a);
 
-  // const b = await SDK.quickPay()
-  // console.log(b)
+  const b = await SDK.quickPay()
+  console.log(b)
 })();

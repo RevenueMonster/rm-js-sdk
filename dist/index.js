@@ -105,7 +105,7 @@ exports.RMSDK = RMSDK;
                 return [4 /*yield*/, SDK.getClientCredentials()];
             case 1:
                 a = _a.sent();
-                console.log(a.data.error);
+                console.log(a);
                 return [2 /*return*/];
         }
     });
