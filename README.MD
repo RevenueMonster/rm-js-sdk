@@ -71,7 +71,7 @@ const data =
    ipAddress = "127.0.0.1",
    storeId = "123412341234", 
 };
-const result = await SDK.quickPayCreate(accessToken, data);
+const result = await SDK.Payment.initQuickPay(accessToken, data);
 ```
 
 * Payment (Quick Pay) - Refund
@@ -83,7 +83,7 @@ const data =
    refund = new { type = "FULL", currencyType = "MYR", amount = 100 },
    reason = "test",
 };
-const result = await SDK.quickPayRefund(accessToken, data);
+const result = await SDK.Payment.refund(accessToken, data);
 ```
 
 * Payment (Quick Pay) - Reverse
@@ -93,14 +93,14 @@ const data =
 {
     orderId = "12345678131",
 };
-const result = await SDK.quickPayReverse(accessToken, data);
+const result = await SDK.Payment.reverse(accessToken, data);
 ```
 
 * Payment (Quick Pay) - Get all payment trasnactions
     * To query all payment transaction.
     
 ```
-const result = await SDK.quickPayGetPaymentTransactions(accessToken);
+const result = await SDK.Payment.getPaymentTransactions(accessToken);
 ```
 
 * Payment (Quick Pay) - get payment trasnaction by Trasnaction ID
@@ -108,14 +108,14 @@ const result = await SDK.quickPayGetPaymentTransactions(accessToken);
 
     
 ```
-const result = await SDK.quickPayGetPaymentTransactionByID(accessToken, trasnactionId);
+const result = await SDK.Payment.getPaymentTransactionById(accessToken, trasnactionId);
 ```
 
 * Payment (Quick Pay) - get payment trasnaction by Order ID
     * To query for payment transaction using orderId.
     
 ```
-const result = await SDK.quickPayGetPaymentTransactionByOrderID(accessToken, orderId);
+const result = await SDK.Payment.getPaymentTransactionByOrderId(accessToken, orderId);
 ```
 
 * Payment (Quick Pay) - Get daily settlement report
@@ -128,7 +128,7 @@ const data =
      region: "MALAYSIA",
      sequence: 1
 };
-const result = await SDK.quickPayGetDailySettlementReport(accessToken, data);
+const result = await SDK.Payment.getDailySettlementReport(accessToken, data);
 ```
 
 
