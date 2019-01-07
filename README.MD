@@ -14,7 +14,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 
 ### Covered API
-* Signature Algorithm
 * Client Credentials (Authentication)
 * Refresh Token (Authentication)
 * Payment (Quick Pay) - Payment
