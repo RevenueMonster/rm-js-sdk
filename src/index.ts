@@ -17,6 +17,7 @@ import {
   updateStore,
   deleteStore
 } from './store';
+import { giveLoyaltyPoint, ILoyaltyRewardArg } from './loyalty';
 
 interface config {
   timeout?: number
@@ -57,6 +58,8 @@ export interface RMSDKInstance {
   getTransactionUrl: (accessToken: string) => Promise<any>,
   getTransactionUrlByCode: (accessToken: string, code: string) => Promise<any>,
   getTransactionsByCode: (accessToken: string, code: string) => Promise<any>,
+
+  giveLoyaltyPoint: (accessToken: string, data: ILoyaltyRewardArg) => Promise<any>,
 }
 
 export function RMSDK(instanceConfig?: config): RMSDKInstance {
@@ -127,6 +130,8 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
     getTransactionUrl,
     getTransactionUrlByCode,
     getTransactionsByCode,
+
+    giveLoyaltyPoint
   }
 }
 

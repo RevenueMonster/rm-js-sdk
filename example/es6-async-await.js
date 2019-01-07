@@ -39,6 +39,12 @@ async function main() {
 
     const resp6 = await SDK.getUserProfile(resp0.accessToken)
     console.log(resp6)
+
+    const resp7 = await SDK.giveLoyaltyPoint(resp0.accessToken, {
+      point: 100,
+      type: 'ID',
+    })
+    console.log(resp7)
 }
 
 main()
