@@ -62,7 +62,7 @@ var result = await SDK.refreshToken(refreshToken);
 * Payment (Quick Pay) - Payment
     * To make payment by scanning barcode/authcode from user
 ```
-var data = new
+const data =
 {
     authCode = "161583080660761280", //get from user payment barcode
     order = new { 
@@ -72,27 +72,64 @@ var data = new
    ipAddress = "127.0.0.1",
    storeId = "123412341234", 
 };
-var result = await SDK.quickPayCreate(accessToken, data);
+const result = await SDK.quickPayCreate(accessToken, data);
 ```
 
 * Payment (Quick Pay) - Refund
     * To refund the successful transactions 
 ```
-var data = new
+const data =
 {
    transactionId = "181203100634010427614646", // get from user's transaction 
    refund = new { type = "FULL", currencyType = "MYR", amount = 100 },
    reason = "test",
 };
-var result = await SDK.quickPayRefund(accessToken, data);
+const result = await SDK.quickPayRefund(accessToken, data);
 ```
 
 * Payment (Quick Pay) - Reverse
     * To reverse time-out or problematic transaction
 ```
-var data = new
+const data = 
 {
     orderId = "12345678131",
 };
-var result = await SDK.quickPayReverse(accessToken, data);
+const result = await SDK.quickPayReverse(accessToken, data);
 ```
+
+* Payment (Quick Pay) - Get all payment trasnactions
+    * To query all payment transaction.
+    
+```
+const result = await SDK.quickPayGetPaymentTransactions(accessToken);
+```
+
+* Payment (Quick Pay) - get payment trasnaction by Trasnaction ID
+    * To query for payment transaction using trasnactionId.
+
+    
+```
+const result = await SDK.quickPayGetPaymentTransactionByID(accessToken, trasnactionId);
+```
+
+* Payment (Quick Pay) - get payment trasnaction by Order ID
+    * To query for payment transaction using orderId.
+    
+```
+const result = await SDK.quickPayGetPaymentTransactionByOrderID(accessToken, orderId);
+```
+
+* Payment (Quick Pay) - Get daily settlement report
+    * To get daily settlment report 
+```
+const data = 
+{
+     date: "2019-01-06",
+     method: "WECHATPAY",
+     region: "MALAYSIA",
+     sequence: 1
+};
+const result = await SDK.quickPayGetDailySettlementReport(accessToken, data);
+```
+
+
