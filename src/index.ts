@@ -27,6 +27,14 @@ import {
   deleteStore
 } from './store';
 import { giveLoyaltyPoint, ILoyaltyRewardArg } from './loyalty';
+import { 
+  issueVoucher,
+  voidVoucher,
+  getVoucherByCode,
+  getVoucherBatches,
+  getVoucherBatcheByKey,
+ } from './voucher';
+
 
 interface config {
   timeout?: number
@@ -64,6 +72,13 @@ export interface RMSDKInstance {
   getUserProfile: (accessToken: string) => Promise<any>,
 
   giveLoyaltyPoint: (accessToken: string, data: ILoyaltyRewardArg) => Promise<any>,
+
+  issueVoucher: (accessToken: string, batchKey: string) => Promise<any>,
+  voidVoucher: (accessToken: string, code: string) => Promise<any>,
+  getVoucherByCode: (accessToken: string, code: string) => Promise<any>,
+  getVoucherBatches: (accessToken: string) => Promise<any>,
+  getVoucherBatcheByKey: (accessToken: string, batchKey: string) => Promise<any>,
+
 
   Payment: {
     initQuickPay: (acessToken: string, data: object) => Promise<any>,
@@ -160,7 +175,13 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
       getTransactionsByCode,
     },
 
-    giveLoyaltyPoint
+    giveLoyaltyPoint,
+
+    issueVoucher,
+    voidVoucher,
+    getVoucherByCode,
+    getVoucherBatches,
+    getVoucherBatcheByKey,
   }
 }
 
