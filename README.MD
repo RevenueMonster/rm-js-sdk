@@ -9,11 +9,11 @@ This is an Nodejs SDK that maps some of the RESTful methods of Open API that are
   * [get merchant profile](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-merchant-profile---getmerchantprofileaccesstoken)
   * [get list of merchant subscriptions](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-merchant-subscription---getmerchantsubscriptionsaccesstoken)
 * Store related API
-  * get list of stores
-  * get store by Id
-  * create store
-  * update store
-  * delete store
+  * [get list of stores](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-list-of-stores---getstoresaccesstoken)
+  * [get store by Id](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-store-by-id---getstorebyidaccesstoken)
+  * [create store](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#create-store---createstoreaccesstoken-data)
+  * [update store](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#update-store---updatestoreaccesstoken-storeid-data)
+  * [delete store](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#delete-store---deletestoreaccesstoken-storeid)
 * User related API
   * [get user profile](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-user-profile---getuserprofileaccesstoken)
 * Payment (Transaction QRCode/URL)
@@ -30,13 +30,13 @@ This is an Nodejs SDK that maps some of the RESTful methods of Open API that are
   * [get payment trasaction by Order Id](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-payment-trasaction-by-order-id)
   * [get daily settlement report](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-daily-settlement-report)
 * Loyalty
-  * give loyalty point
+  * [give loyalty point](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#give-loyalty-point---giveloyaltypointaccesstoken-data)
 * Voucher
-  * issue voucher
-  * void voucher
-  * get voucher by code
-  * get list of voucher batches
-  * get voucher batch by key
+  * [issue voucher](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#issue-voucher---issuevoucheraccesstoken-batchkey)
+  * [void voucher](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#void-voucher---voidvoucheraccesstoken-code)
+  * [get voucher by code](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-voucher-by-code---getvoucherbycodeaccesstoken-code)
+  * [get list of voucher batches](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-list-of-voucher-batches---getvoucherbatchesaccesstoken)
+  * [get voucher batch by key](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-voucher-batch-by-key---getvoucherbatchbykeyaccesstoken-batchkey)
 
 ### Prerequisites
 1. Get Client ID and Client Secret from portal.
