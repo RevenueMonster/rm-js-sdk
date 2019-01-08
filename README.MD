@@ -1,31 +1,38 @@
 # API-SDK-Nodejs
 This is an Nodejs SDK that maps some of the RESTful methods of Open API that are documented at [doc.revenuemonster.my](https://doc.revenuemonster.my/).
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+### Supported APIs
+* Client Credentials (Authentication)
+  * client credential - access token generation
+  * refresh access token
+* Mechant related API
+  * get merchant profile
+  * get list of merchant subscriptions
+* Store related API
+  * get list of stores
+  * get store by Id
+  * create store
+  * update store
+  * delete store
+* User related API
+  * get user profile
+* Payment (Transaction QRCode/URL)
+  * create transaction QRCode/URL
+  * get list of transaction QRCode/URLs generated
+  * get transaction QRCode/URL by code
+  * get list of transactions by code
+* Payment (Quick Pay)
+  * initiate Quick Pay transaction
+  * refund transaction
+  * reverse transaction
+  * get list of payment transactions
+  * get payment transaction by Id
+  * get payment trasaction by Order Id
+  * get daily settlement report
+* Loyalty
+  * give loyalty point
 
 ### Prerequisites
-
-
-
-### Installing
-
-
-
-### Covered API
-* Client Credentials (Authentication)
-* Refresh Token (Authentication)
-* Payment (Quick Pay) - Payment
-* Payment (Quick Pay) - Refund
-* Payment (Quick Pay) - Reverse
-* Payment (Quick Pay) - Get All Payment Transactions
-* Payment (Quick Pay) - Get Payment Transaction By ID
-* Payment (Quick Pay) - Get Payment Transaction By Order ID
-* Payment (Quick Pay) - Daily Settlement Report
-
-
-### Usage
 1. Get Client ID and Client Secret from portal.
 ![ClientIDClientSecret](https://storage.googleapis.com/rm-portal-assets/img/rm-landing/clientIDclientSecret.png)
 2. Generate private key and publci key from portal. 
@@ -33,102 +40,168 @@ These instructions will get you a copy of the project up and running on your loc
 3. Store private key for own use and public key at portal.
 ![PastePublicKey](https://storage.googleapis.com/rm-portal-assets/img/rm-landing/pastePublicKey.png)
 
+## SDK API
 
-* Client SDK Config
-    * default SDK config object 
+Import the RMSDK via `require`
+```js
+var RMSDK = require('../RM-API-SDK-Nodejs').RMSDK
 ```
+Or ES5
+```js
+var { RMSDK } = require('../RM-API-SDK-Nodejs')
+```
+Or Import/Export convention
+```js
+import { RMSDK } from '../RM-API-SDK-Nodejs'
+```
+
+Initialise a RMSDK instance by using
+```js
 const SDK = RMSDK({
-    clientId: '',
-    clientSecret: '',
-    privateKey: '',
-    isProduction: false,
-    timeout: 2000,
-  });
+    clientId: '5499912462549392892',
+    clientSecret: 'pwMapjZzHljBALIGHxfGGXmiGLxjWBKt',
+    privateKey: Buffer.from(fs.readFileSync('privateKey.pem')).toString(),
+
+    isProduction: false // default, optional
+    timeout: 2000, // default, optional
+})
 ```
 
-* Client Credentials (Authentication)
-    * To get refresh token and access token(expired after 2 hours) with using provided clientId and clientSecret
-```
-var result = await SDK.getClientCredentials();
+### Access Token Generation - getClientCredentials()
+To get refresh token and access token(expired after 2 hours) with using provided `clientId` and `clientSecret`.
+
+```js
+const result = await SDK.getClientCredentials();
 ```
 
-* Refresh Token (Authentication)
-    * To get new access token(expired after 2 hours) with using provided clientId and clientSecret (recommended to schedule to run this fucntion on every less than 2 hours) in order to avoid expired access token error.
-```
-var result = await SDK.refreshToken(refreshToken);
-```
-
-* Payment (Quick Pay) - Payment
-    * To make payment by scanning barcode/authcode from user
-```
-const data =
-{
-    authCode = "161583080660761280", //get from user payment barcode
-    order = new { 
-                  amount = 100, currencyType = "MYR", id = "12345678131", 
-                  title = "title", detail = "desc", additionalData = "API Test" 
-                },
-   ipAddress = "127.0.0.1",
-   storeId = "123412341234", 
-};
-const result = await SDK.Payment.initQuickPay(accessToken, data);
+### Refresh Access Token - refreshToken(string)
+To get new access token(expired after 2 hours) with using provided clientId and clientSecret (recommended to schedule to run this fucntion on every less than 2 hours) in order to avoid expired access token error.
+```js
+const result = await SDK.refreshToken(refreshToken);
 ```
 
-* Payment (Quick Pay) - Refund
-    * To refund the successful transactions 
+## Merchant related API
+
+### Get merchant profile - getMerchantProfile(accessToken)
+```js
+const result = await SDK.getMerchantProfile(accessToken);
 ```
-const data =
-{
-   transactionId = "181203100634010427614646", // get from user's transaction 
-   refund = new { type = "FULL", currencyType = "MYR", amount = 100 },
-   reason = "test",
-};
-const result = await SDK.Payment.refund(accessToken, data);
+### Get merchant subscription - getMerchantSubscriptions(accessToken)
+```js
+const result = await SDK.getMerchantSubscriptions(accessToken)
 ```
 
-* Payment (Quick Pay) - Reverse
-    * To reverse time-out or problematic transaction
-```
-const data = 
-{
-    orderId = "12345678131",
-};
-const result = await SDK.Payment.reverse(accessToken, data);
+## User related API
+### Get user profile - getUserProfile(accessToken)
+```js
+const result = await SDK.getUserProfile(accessToken)
 ```
 
-* Payment (Quick Pay) - Get all payment trasnactions
-    * To query all payment transaction.
-    
+## Payment (Transaction QRCode/URL)
+### Create transaction QRCode/URL
+**Payment.createTransactionUrl(accessToken, transactionPayload)**
+```js
+const result = await SDK.Payment.createTransactionUrl(accessToken, {
+    amount: 100,
+    currencyType: 'MYR',
+    expiry: { type: 'PERMANENT' },
+    isPreFillAmount: true,
+    method: ['WECHATPAY'],
+    order: {
+        details: 'detail AAA',
+        title: 'title BBB',
+    },
+    redirectUrl: 'https://www.google.com',
+    storeId: '1981039839353524638',
+    type: 'DYNAMIC',
+})
+console.log(result)
 ```
+
+### Get list of transaction QRCode/URLs generated
+**Payment.getTransactionUrl(accessToken)**
+```js
+const result = await SDK.Payment.getTransactionUrl(accessToken)
+```
+
+### Get transaction QRCode/URL by code
+**Payment.getTransactionUrlByCode(accessToken, code)**
+```js
+const result = await SDK.Payment.getTransactionUrlByCode(accessToken, code)
+```
+
+### Get list of transactions by code
+**Payment.getTransactionsByCode(accessToken, code)**
+```js
+const result = await SDK.Payment.getTransactionsByCode(accessToken)
+```
+
+## Payment (Quick Pay)
+
+### Initiate Quick Pay transaction
+**Payment.initQuickPay(accessToken, data)**
+```js
+const result = await SDK.Payment.initQuickPay(accessToken, {
+    authCode: '161108235812586242',
+    order: {
+        amount: 100,
+        currencyType: 'MYR',
+        id: '12344333233444',
+        title: 'title',
+        detail: 'description here',
+        additionalData: 'API testing',
+    },
+    ipAddress: '175.143.101.229',
+    storeId: '5237968049713769466'
+});
+```
+
+### Refund transaction
+**Payment.refund(accessToken, data)**
+```js
+const result = await SDK.Payment.refund(accessToken, {
+    transactionId: '181203100634010427614646',
+    refund: {
+        type: 'FULL',
+        currencyType: 'MYR',
+        amount: 100,
+    },
+    reason: 'testing purpose',
+});
+```
+### Reverse transaction
+**Payment.reverse(accessToken, data)**
+```js
+const result = await SDK.Payment.reverse(accessToken, {
+    orderId: '12345678123'
+});
+```
+
+### Get list of payment transactions
+**Payment.getPaymentTransactions(accessToken)**
+```js
 const result = await SDK.Payment.getPaymentTransactions(accessToken);
 ```
 
-* Payment (Quick Pay) - get payment trasnaction by Trasnaction ID
-    * To query for payment transaction using trasnactionId.
-
-    
-```
+### Get payment transaction by Id
+**Payment.getTransactionById(accessToken, Id)**
+```js
 const result = await SDK.Payment.getPaymentTransactionById(accessToken, trasnactionId);
 ```
 
-* Payment (Quick Pay) - get payment trasnaction by Order ID
-    * To query for payment transaction using orderId.
-    
-```
+### Get payment trasaction by Order Id
+**Payment.getTransactionByOrderId(accessToken, orderId)**
+```js
 const result = await SDK.Payment.getPaymentTransactionByOrderId(accessToken, orderId);
 ```
 
-* Payment (Quick Pay) - Get daily settlement report
-    * To get daily settlment report 
+### Get daily settlement report
+**Payment.getDailySettlementReport(accessToken, data)**
+```js
+const result = await SDK.Payment.getDailySettlementReport(accessToken, {
+    date: "2019-01-06",
+    method: "WECHATPAY",
+    region: "MALAYSIA",
+    sequence: 1
+});
 ```
-const data = 
-{
-     date: "2019-01-06",
-     method: "WECHATPAY",
-     region: "MALAYSIA",
-     sequence: 1
-};
-const result = await SDK.Payment.getDailySettlementReport(accessToken, data);
-```
-
-
