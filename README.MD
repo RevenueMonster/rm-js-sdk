@@ -131,4 +131,43 @@ const data =
 const result = await SDK.Payment.getDailySettlementReport(accessToken, data);
 ```
 
+* Voucher - Issue voucher
+    * To issue vouchers for customer. 
+    * [batchkey] can be retrieved by viewing at merchant portal or using endpoint
+```
 
+const result = await SDK.issueVoucher(accessToken, batchKey);
+```
+
+* Voucher - Void voucher
+    * To void voucher(s) of customer. 
+    * [code] is the code generated from Issue Voucher endpoint.
+```
+
+const result = await SDK.voidVoucher(accessToken, code);
+```
+
+* Voucher - Get voucher by code
+    * To get a single voucher by code.
+    * [code] is the code generated from Issue Voucher endpoint.
+```
+
+const result = await SDK.getVoucherByCode(accessToken, code);
+```
+
+
+* Voucher - Get voucher batches
+    * To get multiple voucher batches.
+```
+
+const result = await SDK.getVoucherBatches(accessToken);
+```
+
+
+* Voucher - Get voucher batche by key
+    * To get multiple voucher batches.
+    * [batchkey] can be retrieved by viewing at merchant portal or using endpoint
+```
+
+const result = await SDK.getVoucherBatcheByKey(accessToken, batchKay);
+```
