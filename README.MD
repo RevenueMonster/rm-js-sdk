@@ -1,5 +1,8 @@
 # API-SDK-Nodejs
-This is an Nodejs SDK that maps some of the RESTful methods of Open API that are documented at [doc.revenuemonster.my](https://doc.revenuemonster.my/).
+[![](https://img.shields.io/npm/v/rm-api-sdk.svg?style=flat-square)](https://www.npmjs.com/package/rm-api-sdk)
+[![](https://img.shields.io/npm/types/rm-api-sdk.svg)](https://www.npmjs.com/package/rm-api-sdk)
+
+This is an Nodejs/Typescript SDK that maps some of the RESTful methods of Open API that are documented at [doc.revenuemonster.my](https://doc.revenuemonster.my/).
 
 ### Supported APIs
 * Client Credentials (Authentication)
@@ -50,15 +53,15 @@ This is an Nodejs SDK that maps some of the RESTful methods of Open API that are
 
 Import the RMSDK via `require`
 ```js
-var RMSDK = require('../RM-API-SDK-Nodejs').RMSDK
+var RMSDK = require('rm-api-sdk').RMSDK
 ```
 Or ES5
 ```js
-var { RMSDK } = require('../RM-API-SDK-Nodejs')
+var { RMSDK } = require('rm-api-sdk')
 ```
 Or Import/Export convention
 ```js
-import { RMSDK } from '../RM-API-SDK-Nodejs'
+import { RMSDK } from 'rm-api-sdk'
 ```
 
 Initialise a RMSDK instance by using
@@ -146,7 +149,7 @@ const result = await SDK.updateStore(accessToken, '1662168764176583360', {
 })
 ```
 
-### Delete store - deleteStore(accessTOken, storeId)
+### Delete store - deleteStore(accessToken, storeId)
 ```js
 const result = await SDK.deleteStore(accessToken, '1662168764176583360')
 ```
@@ -280,7 +283,10 @@ const result = await SDK.giveLoyaltyPoint(accessToken, {
 ## Voucher related API
 ### Issue voucher - issueVoucher(accessToken, batchKey)
 ```js
-const result = await SDK.issueVoucher(accessToken, 'EhQKCE1lcmNoYW50EJXVzd3wraqTORIYCgxWb3VjaGVyQmF0Y2gQkvnGweaB2uQg')
+const result = await SDK.issueVoucher(
+    accessToken,
+    'EhQKCE1lcmNoYW50EJXVzd3wraqTORIYCgxWb3VjaGVyQmF0Y2gQkvnGweaB2uQg'
+)
 ```
 
 ### Void voucher - voidVoucher(accessToken, code)
@@ -300,5 +306,8 @@ const result = await SDK.getVoucherBatches(accessToken)
 
 ### Get voucher batch by key - getVoucherBatchByKey(accessToken, batchKey)
 ```js
-const result = await SDK.getVoucherBatchByKey(accessToken, 'EhQKCE1lcmNoYW50EJXVzd3wraqTORIYCgxWb3VjaGVyQmF0Y2gQxZP495jpsOla')
+const result = await SDK.getVoucherBatchByKey(
+    accessToken,
+    'EhQKCE1lcmNoYW50EJXVzd3wraqTORIYCgxWb3VjaGVyQmF0Y2gQxZP495jpsOla'
+)
 ```
