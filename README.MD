@@ -3,11 +3,11 @@ This is an Nodejs SDK that maps some of the RESTful methods of Open API that are
 
 ### Supported APIs
 * Client Credentials (Authentication)
-  * client credential - access token generation
-  * refresh access token
+  * [client credential - access token generation](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#access-token-generation---getclientcredentials)
+  * [refresh access token](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#refresh-access-token---refreshtokenstring)
 * Mechant related API
-  * get merchant profile
-  * get list of merchant subscriptions
+  * [get merchant profile](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-merchant-profile---getmerchantprofileaccesstoken)
+  * [get list of merchant subscriptions](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-merchant-subscription---getmerchantsubscriptionsaccesstoken)
 * Store related API
   * get list of stores
   * get store by Id
@@ -15,20 +15,20 @@ This is an Nodejs SDK that maps some of the RESTful methods of Open API that are
   * update store
   * delete store
 * User related API
-  * get user profile
+  * [get user profile](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-user-profile---getuserprofileaccesstoken)
 * Payment (Transaction QRCode/URL)
-  * create transaction QRCode/URL
-  * get list of transaction QRCode/URLs generated
-  * get transaction QRCode/URL by code
-  * get list of transactions by code
+  * [create transaction QRCode/URL](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#create-transaction-qrcodeurl)
+  * [get list of transaction QRCode/URLs generated](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-list-of-transaction-qrcodeurls-generated)
+  * [get transaction QRCode/URL by code](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-transaction-qrcodeurl-by-code)
+  * [get list of transactions by code](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-list-of-transactions-by-code)
 * Payment (Quick Pay)
-  * initiate Quick Pay transaction
-  * refund transaction
-  * reverse transaction
-  * get list of payment transactions
-  * get payment transaction by Id
-  * get payment trasaction by Order Id
-  * get daily settlement report
+  * [initiate Quick Pay transaction](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#initiate-quick-pay-transaction)
+  * [refund transaction](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#refund-transaction)
+  * [reverse transaction](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#reverse-transaction)
+  * [get list of payment transactions](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-list-of-payment-transactions)
+  * [get payment transaction by Id](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-payment-transaction-by-id)
+  * [get payment trasaction by Order Id](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-payment-trasaction-by-order-id)
+  * [get daily settlement report](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-daily-settlement-report)
 * Loyalty
   * give loyalty point
 
