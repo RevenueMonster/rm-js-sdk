@@ -48,11 +48,14 @@ const SDK = RMSDK({
 
 #### Authentication
 
+
 * Client Credentials
     * To get refresh token and access token(expired after 2 hours) with using provided clientId and clientSecret
 ```
 var result = await SDK.getClientCredentials();
 ```
+
+
 
 * Refresh Token
     * To get new access token(expired after 2 hours) with using provided clientId and clientSecret (recommended to schedule to run this fucntion on every less than 2 hours) in order to avoid expired access token error.
@@ -60,7 +63,10 @@ var result = await SDK.getClientCredentials();
 var result = await SDK.refreshToken(refreshToken);
 ```
 
+
+
 #### Payment (Quick Pay)
+
 
 * Pay
     * To make payment by scanning barcode/authcode from user
@@ -78,6 +84,8 @@ const data =
 const result = await SDK.Payment.initQuickPay(accessToken, data);
 ```
 
+
+
 * Refund
     * To refund the successful transactions 
 ```
@@ -90,6 +98,8 @@ const data =
 const result = await SDK.Payment.refund(accessToken, data);
 ```
 
+
+
 * Reverse
     * To reverse time-out or problematic transaction
 ```
@@ -100,12 +110,16 @@ const data =
 const result = await SDK.Payment.reverse(accessToken, data);
 ```
 
+
+
 * Get all payment trasnactions
     * To query all payment transaction.
     
 ```
 const result = await SDK.Payment.getPaymentTransactions(accessToken);
 ```
+
+
 
 * Get payment trasnaction by Trasnaction ID
     * To query for payment transaction using trasnactionId.
@@ -115,12 +129,16 @@ const result = await SDK.Payment.getPaymentTransactions(accessToken);
 const result = await SDK.Payment.getPaymentTransactionById(accessToken, trasnactionId);
 ```
 
+
+
 * Get payment trasnaction by Order ID
     * To query for payment transaction using orderId.
     
 ```
 const result = await SDK.Payment.getPaymentTransactionByOrderId(accessToken, orderId);
 ```
+
+
 
 * Get daily settlement report
     * To get daily settlment report 
@@ -135,7 +153,10 @@ const data =
 const result = await SDK.Payment.getDailySettlementReport(accessToken, data);
 ```
 
+
+
 #### Voucher
+
 
 * Issue voucher
     * To issue vouchers for customer. 
@@ -145,6 +166,8 @@ const result = await SDK.Payment.getDailySettlementReport(accessToken, data);
 const result = await SDK.issueVoucher(accessToken, batchKey);
 ```
 
+
+
 * Void voucher
     * To void voucher(s) of customer. 
     * [code] is the code generated from Issue Voucher endpoint.
@@ -152,6 +175,8 @@ const result = await SDK.issueVoucher(accessToken, batchKey);
 
 const result = await SDK.voidVoucher(accessToken, code);
 ```
+
+
 
 * Get voucher by code
     * To get a single voucher by code.
@@ -162,12 +187,14 @@ const result = await SDK.getVoucherByCode(accessToken, code);
 ```
 
 
+
 * Get voucher batches
     * To get multiple voucher batches.
 ```
 
 const result = await SDK.getVoucherBatches(accessToken);
 ```
+
 
 
 * Get voucher batche by key
