@@ -31,6 +31,12 @@ This is an Nodejs SDK that maps some of the RESTful methods of Open API that are
   * [get daily settlement report](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-daily-settlement-report)
 * Loyalty
   * give loyalty point
+* Voucher
+  * issue voucher
+  * void voucher
+  * get voucher by code
+  * get list of voucher batches
+  * get voucher batch by key
 
 ### Prerequisites
 1. Get Client ID and Client Secret from portal.
@@ -91,6 +97,60 @@ const result = await SDK.getMerchantProfile(accessToken);
 const result = await SDK.getMerchantSubscriptions(accessToken)
 ```
 
+## Store realted API
+### Get list of stores - getStores(accessToken)
+```js
+const result = await SDK.getMerchantSubscriptions(accessToken)
+```
+
+### Get store by Id - getStoreById(accessToken)
+```js
+const result = await SDK.getStoreById(accessToken)
+```
+
+### Create store - createStore(accessToken, data)
+```js
+const result = await SDK.createStore(accessToken, {
+    name: 'Revenue Monster',
+    addressLine1: 'B-5-30, 5th Floor, Block Bougainvillea,'
+    addressLine2: 'PJU 6A, Lebuhraya SPRINT, 10 Boulevard,' // optional
+    postCode: '47400',
+    city: 'Petaling Jaya',
+    state: 'Selangor',
+    country: 'Malaysia',
+    countryCode: '60',
+    phoneNumber: '377334080',
+    geoLocation: { // optional
+        Lat: 3.1349857,
+        Lng: 101.6136659
+    }
+})
+```
+
+### Update store - updateStore(accessToken, storeId, data)
+```js
+const result = await SDK.updateStore(accessToken, '1662168764176583360', {
+    name: 'Revenue Monster',
+    addressLine1: 'B-5-30, 5th Floor, Block Bougainvillea,'
+    addressLine2: 'PJU 6A, Lebuhraya SPRINT, 10 Boulevard,' // optional
+    postCode: '47400',
+    city: 'Petaling Jaya',
+    state: 'Selangor',
+    country: 'Malaysia',
+    countryCode: '60',
+    phoneNumber: '377334080',
+    geoLocation: { // optional
+        Lat: 3.1349857,
+        Lng: 101.6136659
+    }
+})
+```
+
+### Delete store - deleteStore(accessTOken, storeId)
+```js
+const result = await SDK.deleteStore(accessToken, '1662168764176583360')
+```
+
 ## User related API
 ### Get user profile - getUserProfile(accessToken)
 ```js
@@ -127,7 +187,7 @@ const result = await SDK.Payment.getTransactionUrl(accessToken)
 ### Get transaction QRCode/URL by code
 **Payment.getTransactionUrlByCode(accessToken, code)**
 ```js
-const result = await SDK.Payment.getTransactionUrlByCode(accessToken, code)
+const result = await SDK.Payment.getTransactionUrlByCode(accessToken, 'a669adc3b06fe5cef977cc762f40ce8c')
 ```
 
 ### Get list of transactions by code
@@ -186,13 +246,13 @@ const result = await SDK.Payment.getPaymentTransactions(accessToken);
 ### Get payment transaction by Id
 **Payment.getTransactionById(accessToken, Id)**
 ```js
-const result = await SDK.Payment.getPaymentTransactionById(accessToken, trasnactionId);
+const result = await SDK.Payment.getPaymentTransactionById(accessToken, '1805260552060011600267');
 ```
 
 ### Get payment trasaction by Order Id
 **Payment.getTransactionByOrderId(accessToken, orderId)**
 ```js
-const result = await SDK.Payment.getPaymentTransactionByOrderId(accessToken, orderId);
+const result = await SDK.Payment.getPaymentTransactionByOrderId(accessToken, '9809099398273542333339');
 ```
 
 ### Get daily settlement report
@@ -204,4 +264,41 @@ const result = await SDK.Payment.getDailySettlementReport(accessToken, {
     region: "MALAYSIA",
     sequence: 1
 });
+```
+
+## Loyalty related API
+### Give loyalty point - giveLoyaltyPoint(accessToken, data)
+```js
+const result = await SDK.giveLoyaltyPoint(accessToken, {
+    point: 100,
+    type: 'PHONENUMBER',
+    countryCode: '60',
+    phoneNumber: '176473298',
+});
+```
+
+## Voucher related API
+### Issue voucher - issueVoucher(accessToken, batchKey)
+```js
+const result = await SDK.issueVoucher(accessToken, 'EhQKCE1lcmNoYW50EJXVzd3wraqTORIYCgxWb3VjaGVyQmF0Y2gQkvnGweaB2uQg')
+```
+
+### Void voucher - voidVoucher(accessToken, code)
+```js
+const result = await SDK.voidVoucher(accessToken, 'NAklEfbVdV')
+```
+
+### Get voucher by code - getVoucherByCode(accessToken, code)
+```js
+const result = await SDK.getVoucherByCode(accessToken, 'NAklEfbVdV')
+```
+
+### Get list of voucher batches - getVoucherBatches(accessToken)
+```js
+const result = await SDK.getVoucherBatches(accessToken)
+```
+
+### Get voucher batch by key - getVoucherBatchByKey(accessToken, batchKey)
+```js
+const result = await SDK.getVoucherBatchByKey(accessToken, 'EhQKCE1lcmNoYW50EJXVzd3wraqTORIYCgxWb3VjaGVyQmF0Y2gQxZP495jpsOla')
 ```
