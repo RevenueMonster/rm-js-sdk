@@ -32,7 +32,7 @@ import {
   voidVoucher,
   getVoucherByCode,
   getVoucherBatches,
-  getVoucherBatcheByKey,
+  getVoucherBatchByKey,
  } from './voucher';
 
 
@@ -77,7 +77,7 @@ export interface RMSDKInstance {
   voidVoucher: (accessToken: string, code: string) => Promise<any>,
   getVoucherByCode: (accessToken: string, code: string) => Promise<any>,
   getVoucherBatches: (accessToken: string) => Promise<any>,
-  getVoucherBatcheByKey: (accessToken: string, batchKey: string) => Promise<any>,
+  getVoucherBatchByKey: (accessToken: string, batchKey: string) => Promise<any>,
 
 
   Payment: {
@@ -181,7 +181,7 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
     voidVoucher,
     getVoucherByCode,
     getVoucherBatches,
-    getVoucherBatcheByKey,
+    getVoucherBatchByKey,
   }
 }
 

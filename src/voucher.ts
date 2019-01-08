@@ -102,7 +102,7 @@ export function getVoucherBatches(this: RMSDKInstance, accessToken: string) {
     .catch(err => console.error(err))
 }
 
-export function getVoucherBatcheByKey(this: RMSDKInstance, accessToken: string, batchKey: string) {
+export function getVoucherBatchByKey(this: RMSDKInstance, accessToken: string, batchKey: string) {
     const nonceStr = crypto.randomBytes(32).toString('hex')
     const timestamp = new Date().getTime().toString()
 
