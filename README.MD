@@ -16,13 +16,19 @@ These instructions will get you a copy of the project up and running on your loc
 ### Covered API
 * Client Credentials (Authentication)
 * Refresh Token (Authentication)
-* Payment (Quick Pay) - Payment
+* Payment (Quick Pay) - Pay
 * Payment (Quick Pay) - Refund
 * Payment (Quick Pay) - Reverse
 * Payment (Quick Pay) - Get All Payment Transactions
 * Payment (Quick Pay) - Get Payment Transaction By ID
 * Payment (Quick Pay) - Get Payment Transaction By Order ID
 * Payment (Quick Pay) - Daily Settlement Report
+* Voucher - Issue Voucher
+* Voucher - Void voucher
+* Voucher - Get voucher by code
+* Voucher - Get voucher batches
+* Voucher - Get voucher batche by key
+
 
 
 ### Usage
