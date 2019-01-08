@@ -204,7 +204,7 @@ const result = await SDK.getVoucherBatches(accessToken);
 
 
 * Get voucher batche by key
-    * To get multiple voucher batches.
+    * To get voucher batche by key.
     * [batchkey] can be retrieved by viewing at merchant portal or using endpoint
 ```
 
