@@ -71,8 +71,10 @@ const SDK = RMSDK({
     clientSecret: 'pwMapjZzHljBALIGHxfGGXmiGLxjWBKt',
     privateKey: Buffer.from(fs.readFileSync('privateKey.pem')).toString(),
 
-    isProduction: false // default, optional
-    timeout: 2000, // default, optional
+    openApiVersion: 'v3'  // default, optional
+    oauthApiVersion: 'v1' // default, optional
+    isProduction: false   // default, optional
+    timeout: 2000,        // default, optional
 })
 ```
 

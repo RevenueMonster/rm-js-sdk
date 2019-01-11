@@ -51,7 +51,9 @@ export interface RMSDKInstance {
   clientSecret: string,
   privateKey: string,
 
+  oauthApiVersion: string,
   oauthUrl: string,
+  openApiVersion: string,
   openApiUrl: string,
 
   oauthInstance: AxiosInstance,
@@ -103,16 +105,18 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
     clientId: '',
     clientSecret: '',
     privateKey: '',
+    oauthApiVersion: 'v1',
+    openApiVersion: 'v3',
   }
   const config = merge(defaults, instanceConfig)
   
   const oauthUrl = config.isProduction
-    ? 'https://oauth.revenuemonster.my/v1'
-    : 'https://sb-oauth.revenuemonster.my/v1'
+    ? 'https://oauth.revenuemonster.my/' + config.oauthApiVersion
+    : 'https://sb-oauth.revenuemonster.my/' + config.oauthApiVersion
   
   const openApiUrl = config.isProduction
-    ? 'https://open.revenuemonster.my/v3'
-    : 'https://sb-open.revenuemonster.my/v3'
+    ? 'https://open.revenuemonster.my/' + config.openApiVersion
+    : 'https://sb-open.revenuemonster.my/' + config.openApiVersion 
 
   const oauthInstance = axios.create({
     baseURL: oauthUrl,
@@ -139,7 +143,9 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
     clientSecret: config.clientSecret,
     privateKey: config.privateKey,
 
+    oauthApiVersion: config.oauthApiVersion,
     oauthUrl,
+    openApiVersion: config.openApiVersion,
     openApiUrl,
 
     oauthInstance,
