@@ -3,7 +3,7 @@
   "description": "A NodeJS wrapper for some of the RESTful methods documented at doc.revenuemonster.my",
   "keywords": ["RevenueMonster", "Payment", "API", "SDK"],
   "repository": "git@github.com:RevenueMonster/RM-API-SDK-Nodejs.git",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "https://github.com/RevenueMonster/RM-API-SDK-Nodejs",
   "bugs": {
     "url": "https://github.com/RevenueMonster/RM-API-SDK-Nodejs/issues"

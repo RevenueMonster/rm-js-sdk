@@ -1,26 +1,10 @@
 import crypto = require('crypto');
-// import { map, sortBy, fromPairs } from 'lodash'
+import { map, sortBy, fromPairs } from 'lodash'
 
-// function sortObject(obj: any): object {
-//     const keys = Object.keys(obj)
-//     const sortedKeys = sortBy(keys)
-    
-//     return fromPairs(map(sortedKeys, (key: string) => [ key, obj[key] ]))
-// }
-
-export const sortedObject = function (data: any){ 
-    var obj: any = {};
-    Object.keys(data)
-    .sort()
-    .forEach(function(v, i) {
-        if(data[v].constructor === Object) {
-            obj[v] = sortedObject(data[v]);
-            
-        } else {
-            obj[v] = data[v];
-        }
-    });
-    return obj;
+function sortedObject(obj: any): object {
+    const keys = Object.keys(obj)
+    const sortedKeys = sortBy(keys)
+    return fromPairs(map(sortedKeys, (key: string) => [ key, obj[key] ]))
 }
 
 export function generateSignature(arg: {
@@ -34,7 +18,7 @@ export function generateSignature(arg: {
 
     let signature_data = ''
 
-    if (!!arg.data) {
+    if (arg.data !== null && typeof arg.data === 'object') {
         const signature_body = sortedObject(arg.data)
         const signature = Buffer.from(JSON.stringify(signature_body)).toString('base64')
         signature_data = 'data=' + signature + '&'

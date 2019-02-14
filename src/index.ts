@@ -81,8 +81,21 @@ export interface RMSDKInstance {
   getVoucherBatches: (accessToken: string) => Promise<any>,
   getVoucherBatchByKey: (accessToken: string, batchKey: string) => Promise<any>,
 
-
   Payment: {
+    timeout: number,
+    isProduction: boolean,
+    clientId: string,
+    clientSecret: string,
+    privateKey: string,
+  
+    oauthApiVersion: string,
+    oauthUrl: string,
+    openApiVersion: string,
+    openApiUrl: string,
+  
+    oauthInstance: AxiosInstance,
+    openApiInstance: AxiosInstance,
+
     initQuickPay: (acessToken: string, data: object) => Promise<any>,
     refund: (acessToken: string, data: object) => Promise<any>,
     reverse: (acessToken: string, data: object) => Promise<any>,
@@ -109,7 +122,7 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
     openApiVersion: 'v3',
   }
   const config = merge(defaults, instanceConfig)
-  
+
   const oauthUrl = config.isProduction
     ? 'https://oauth.revenuemonster.my/' + config.oauthApiVersion
     : 'https://sb-oauth.revenuemonster.my/' + config.oauthApiVersion
@@ -167,6 +180,20 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
     getUserProfile,
     
     Payment: {
+      timeout: config.timeout,
+      isProduction: config.isProduction,
+      clientId: config.clientId,
+      clientSecret: config.clientSecret,
+      privateKey: config.privateKey,
+  
+      oauthApiVersion: config.oauthApiVersion,
+      oauthUrl,
+      openApiVersion: config.openApiVersion,
+      openApiUrl,
+  
+      oauthInstance,
+      openApiInstance,
+
       initQuickPay,
       refund,
       reverse,

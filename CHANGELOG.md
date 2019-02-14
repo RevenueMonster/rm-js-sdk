@@ -1,3 +1,7 @@
+1.0.4
+=====
+* Fixed severe bug that makes the privateKey not accessible in the this:RMSDKInstance.
+
 1.0.3
 =====
 * Added API versioning on the API
