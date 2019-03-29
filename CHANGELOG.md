@@ -1,3 +1,9 @@
+1.0.5
+=====
+* Added Wechat related API
+  * Get Revenue Monster Official Account Wechat user Oauth URL.
+  * Get Revenue Monster Official Account Wechat user information by code.
+
 1.0.4
 =====
 * Fixed severe bug that makes the privateKey not accessible in the this:RMSDKInstance.
