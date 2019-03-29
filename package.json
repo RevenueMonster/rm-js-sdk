@@ -8,7 +8,7 @@
     "SDK"
   ],
   "repository": "git@github.com:RevenueMonster/RM-API-SDK-Nodejs.git",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "homepage": "https://github.com/RevenueMonster/RM-API-SDK-Nodejs",
   "bugs": {
     "url": "https://github.com/RevenueMonster/RM-API-SDK-Nodejs/issues"
