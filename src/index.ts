@@ -34,7 +34,10 @@ import {
   getVoucherBatches,
   getVoucherBatchByKey,
  } from './voucher';
-
+import {
+  getWechatOauthUrl,
+  getWechatUserByCode,
+} from './wechat'
 
 interface config {
   timeout?: number
@@ -80,6 +83,9 @@ export interface RMSDKInstance {
   getVoucherByCode: (accessToken: string, code: string) => Promise<any>,
   getVoucherBatches: (accessToken: string) => Promise<any>,
   getVoucherBatchByKey: (accessToken: string, batchKey: string) => Promise<any>,
+
+  getWechatOauthUrl: (accessToken: string, redirectUrl: string) => Promise<any>,
+  getWechatUserByCode: (accessToken: string, code: string) => Promise<any>,
 
   Payment: {
     timeout: number,
@@ -215,6 +221,8 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
     getVoucherByCode,
     getVoucherBatches,
     getVoucherBatchByKey,
+    getWechatOauthUrl,
+    getWechatUserByCode,
   }
 }
 

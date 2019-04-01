@@ -313,3 +313,19 @@ const result = await SDK.getVoucherBatchByKey(
     'EhQKCE1lcmNoYW50EJXVzd3wraqTORIYCgxWb3VjaGVyQmF0Y2gQxZP495jpsOla'
 )
 ```
+
+### Get WeChat User OAuth URL throught Revenue Monster Official Account
+```js
+const result = await SDK.getWechatOauthUrl(
+    accessToken,
+    'user-defined-redirectUrl'
+)
+```
+
+###  Get Revenue Monster Official Account WeChat User Information By Code
+```js
+const result = await SDK.getWechatUserByCode(
+    accessToken,
+    'code-you-get-from-wechat-oauth-url'
+)
+```
