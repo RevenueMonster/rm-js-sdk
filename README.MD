@@ -4,6 +4,14 @@
 
 This is an Nodejs/Typescript SDK that maps some of the RESTful methods of Open API that are documented at [doc.revenuemonster.my](https://doc.revenuemonster.my/).
 
+### Installation
+```bash
+# using npm
+npm i rm-api-sdk
+# using yarn
+yarn add rm-api-sdk
+```
+
 ### Supported APIs
 * Client Credentials (Authentication)
   * [client credential - access token generation](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#access-token-generation---getclientcredentials)
