@@ -1,7 +1,7 @@
 import crypto = require('crypto');
 import { map, sortBy, fromPairs } from 'lodash'
 
-function sortedObject(obj: any): object {
+export function sortObject(obj: any): object {
     const keys = Object.keys(obj)
     const sortedKeys = sortBy(keys)
     return fromPairs(map(sortedKeys, (key: string) => [ key, obj[key] ]))
@@ -19,7 +19,7 @@ export function generateSignature(arg: {
     let signature_data = ''
 
     if (arg.data !== null && typeof arg.data === 'object') {
-        const signature_body = sortedObject(arg.data)
+        const signature_body = sortObject(arg.data)
         const signature = Buffer.from(JSON.stringify(signature_body)).toString('base64')
         signature_data = 'data=' + signature + '&'
     }

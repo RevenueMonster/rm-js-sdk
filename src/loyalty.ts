@@ -1,6 +1,6 @@
 import crypto = require('crypto')
 import { RMSDKInstance } from ".";
-import { generateSignature } from "./signature";
+import { generateSignature, sortObject } from "./signature";
 
 export interface ILoyaltyRewardArg {
     point: number,
@@ -17,7 +17,7 @@ export function giveLoyaltyPoint(this: RMSDKInstance, accessToken: string, data:
     return this.openApiInstance({
         url: 'loyalty/reward',
         method: 'post',
-        data,
+        data: sortObject(data),
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-Timestamp': timestamp,

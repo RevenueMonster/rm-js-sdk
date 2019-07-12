@@ -1,6 +1,6 @@
 import crypto = require('crypto')
 import { RMSDKInstance } from ".";
-import { generateSignature } from "./signature";
+import { generateSignature, sortObject } from "./signature";
 
 export function getStores(this: RMSDKInstance, accessToken: string) {
     const nonceStr = crypto.randomBytes(32).toString('hex')
@@ -59,7 +59,7 @@ export function createStore(this: RMSDKInstance, accessToken: string, data: obje
     return this.openApiInstance({
         url: 'store',
         method: 'post',
-        data,
+        data: sortObject(data),
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-Timestamp': timestamp,
@@ -85,7 +85,7 @@ export function updateStore(this: RMSDKInstance, accessToken: string, storeId: s
     return this.openApiInstance({
         url: 'store/' + storeId,
         method: 'patch',
-        data,
+        data: sortObject(data),
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-Timestamp': timestamp,

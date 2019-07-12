@@ -1,6 +1,6 @@
 import crypto = require('crypto')
 import { RMSDKInstance } from '../'
-import { generateSignature } from '../signature'
+import { generateSignature, sortObject } from '../signature'
 
 /**
  * Quick Pay QR
@@ -14,7 +14,7 @@ export function initQuickPay(this: RMSDKInstance, accessToken: string, data: obj
     return this.openApiInstance({
         url: '/payment/quickpay',
         method: 'post',
-        data,
+        data: sortObject(data),
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-Timestamp': timestamp,
@@ -40,7 +40,7 @@ export function refund(this: RMSDKInstance, accessToken: string, data: object) {
     return this.openApiInstance({
         url: '/payment/refund',
         method: 'post',
-        data,
+        data: sortObject(data),
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-Timestamp': timestamp,
@@ -66,7 +66,7 @@ export function reverse(this: RMSDKInstance, accessToken: string, data: object) 
     return this.openApiInstance({
         url: '/payment/reverse',
         method: 'post',
-        data,
+        data: sortObject(data),
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-Timestamp': timestamp,
@@ -173,7 +173,7 @@ export function getDailySettlementReport(this: RMSDKInstance, accessToken: strin
     return this.openApiInstance({
         url: `/payment/settlement/csv`,
         method: 'post',
-        data,
+        data: sortObject(data),
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-Timestamp': timestamp,

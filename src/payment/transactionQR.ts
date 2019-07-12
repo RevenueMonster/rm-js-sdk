@@ -1,6 +1,6 @@
 import crypto = require('crypto')
 import { RMSDKInstance } from '../'
-import { generateSignature } from '../signature'
+import { generateSignature, sortObject } from '../signature'
 
 export function createTransactionUrl(this: RMSDKInstance, accessToken: string, data: object) {
     const nonceStr = crypto.randomBytes(32).toString('hex')
@@ -9,7 +9,7 @@ export function createTransactionUrl(this: RMSDKInstance, accessToken: string, d
     return this.openApiInstance({
         url: '/payment/transaction/qrcode',
         method: 'post',
-        data,
+        data: sortObject(data),
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-Timestamp': timestamp,

@@ -1,6 +1,6 @@
 import crypto = require('crypto')
 import { RMSDKInstance } from "."
-import { generateSignature } from "./signature"
+import { generateSignature, sortObject } from "./signature"
 
 export function getWechatOauthUrl(this: RMSDKInstance, accessToken: string, redirectUrl: string) {
     const nonceStr = crypto.randomBytes(32).toString('hex')
@@ -13,7 +13,7 @@ export function getWechatOauthUrl(this: RMSDKInstance, accessToken: string, redi
     return this.openApiInstance({
         url: '/socialmedia/rm/wechat-oauth/url',
         method: 'post',
-        data,
+        data: sortObject(data),
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-Timestamp': timestamp,
@@ -40,7 +40,7 @@ export function getWechatUserByCode(this: RMSDKInstance, accessToken: string, co
     return this.openApiInstance({
         url: 'socialmedia/rm/wechat-oauth/code',
         method: 'post',
-        data,
+        data: sortObject(data),
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-Timestamp': timestamp,
