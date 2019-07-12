@@ -8,7 +8,7 @@ function giveLoyaltyPoint(accessToken, data) {
     return this.openApiInstance({
         url: 'loyalty/reward',
         method: 'post',
-        data: data,
+        data: signature_1.sortObject(data),
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-Timestamp': timestamp,

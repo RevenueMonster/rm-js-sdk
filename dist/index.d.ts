@@ -50,7 +50,7 @@ export interface RMSDKInstance {
         oauthInstance: AxiosInstance;
         openApiInstance: AxiosInstance;
         initQuickPay: (acessToken: string, data: object) => Promise<any>;
-        refund: (accessToken: string, data: object) => any;
+        refund: (acessToken: string, data: object) => Promise<any>;
         reverse: (acessToken: string, data: object) => Promise<any>;
         getPaymentTransactions: (acessToken: string) => Promise<any>;
         getPaymentTransactionById: (acessToken: string, Id: string) => Promise<any>;
