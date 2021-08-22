@@ -1,10 +1,17 @@
 import crypto = require('crypto');
-import { map, sortBy, fromPairs } from 'lodash'
 
-export function sortObject(obj: any): object {
-    const keys = Object.keys(obj)
-    const sortedKeys = sortBy(keys)
-    return fromPairs(map(sortedKeys, (key: string) => [ key, obj[key] ]))
+export function sortObject(obj: any): any {
+    const sortedObj: any = {};
+    Object.keys(obj).sort().forEach((key): void => {
+        if(Array.isArray(obj[key])) {
+            sortedObj[key] = obj[key]
+        } else if(typeof obj[key] === 'object') {
+            sortedObj[key] = sortObject(obj[key]);
+        } else {
+            sortedObj[key] = obj[key];
+        }
+    });
+    return sortedObj;
 }
 
 export function generateSignature(arg: {
