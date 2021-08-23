@@ -88,7 +88,6 @@ export function reverse(this: RMSDKInstance, accessToken: string, data: object) 
 export function getPaymentTransactions(this: RMSDKInstance, accessToken: string) {
     const nonceStr = crypto.randomBytes(32).toString('hex')
     const timestamp = new Date().getTime().toString()
-    const data = {};
 
     return this.openApiInstance({
         url: `/payment/transactions`,
@@ -99,7 +98,7 @@ export function getPaymentTransactions(this: RMSDKInstance, accessToken: string)
             'X-Timestamp': timestamp,
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + generateSignature({
-                data,
+                data:null,
                 requestUrl: this.openApiUrl + `/payment/transactions`,
                 nonceStr,
                 signType: 'sha256',
@@ -115,7 +114,6 @@ export function getPaymentTransactions(this: RMSDKInstance, accessToken: string)
 export function getPaymentTransactionById(this: RMSDKInstance, accessToken: string, Id: string) {
     const nonceStr = crypto.randomBytes(32).toString('hex')
     const timestamp = new Date().getTime().toString()
-    const data = {};
     
     return this.openApiInstance({
         url: `/payment/transaction/${Id}`,
@@ -126,7 +124,7 @@ export function getPaymentTransactionById(this: RMSDKInstance, accessToken: stri
             'X-Timestamp': timestamp,
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + generateSignature({
-                data,
+                data:null,
                 requestUrl: this.openApiUrl + `/payment/transaction/${Id}`,
                 nonceStr,
                 signType: 'sha256',
@@ -142,7 +140,6 @@ export function getPaymentTransactionById(this: RMSDKInstance, accessToken: stri
 export function getPaymentTransactionByOrderId(this: RMSDKInstance, accessToken: string, orderId: string) {
     const nonceStr = crypto.randomBytes(32).toString('hex')
     const timestamp = new Date().getTime().toString()
-    const data = {};
 
     return this.openApiInstance({
         url: `/payment/transaction/order/${orderId}`,
@@ -153,7 +150,7 @@ export function getPaymentTransactionByOrderId(this: RMSDKInstance, accessToken:
             'X-Timestamp': timestamp,
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + generateSignature({
-                data,
+                data:null,
                 requestUrl: this.openApiUrl + `/payment/transaction/order/${orderId}`,
                 nonceStr,
                 signType: 'sha256',
