@@ -17,6 +17,9 @@ import {
   getTransactionUrlByCode,
   getTransactionsByCode,
 } from './payment/transactionQR'
+import {
+  createWebPayment,
+} from './payment/webPayment'
 import { getMerchantProfile, getMerchantSubscriptions } from './merchant'
 import { getUserProfile } from './user'
 import {
@@ -114,6 +117,8 @@ export interface RMSDKInstance {
     getTransactionUrl: (accessToken: string) => Promise<any>,
     getTransactionUrlByCode: (accessToken: string, code: string) => Promise<any>,
     getTransactionsByCode: (accessToken: string, code: string) => Promise<any>,
+
+    createWebPayment: (acessToken: string, data: object) => Promise<any>,
   }
 }
 
@@ -212,6 +217,8 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
       getTransactionUrl,
       getTransactionUrlByCode,
       getTransactionsByCode,
+
+      createWebPayment,
     },
 
     giveLoyaltyPoint,

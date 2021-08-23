@@ -60,6 +60,7 @@ export interface RMSDKInstance {
         getTransactionUrl: (accessToken: string) => Promise<any>;
         getTransactionUrlByCode: (accessToken: string, code: string) => Promise<any>;
         getTransactionsByCode: (accessToken: string, code: string) => Promise<any>;
+        createWebPayment: (acessToken: string, data: object) => Promise<any>;
     };
 }
 export declare function RMSDK(instanceConfig?: config): RMSDKInstance;
