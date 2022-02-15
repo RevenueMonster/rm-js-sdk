@@ -1,4 +1,4 @@
-export declare function sortObject(obj: any): object;
+export declare function sortObject(obj: any): any;
 export declare function generateSignature(arg: {
     data: any;
     requestUrl: string;

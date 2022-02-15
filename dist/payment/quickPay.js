@@ -85,7 +85,6 @@ exports.reverse = reverse;
 function getPaymentTransactions(accessToken) {
     var nonceStr = crypto.randomBytes(32).toString('hex');
     var timestamp = new Date().getTime().toString();
-    var data = {};
     return this.openApiInstance({
         url: "/payment/transactions",
         method: 'get',
@@ -95,7 +94,7 @@ function getPaymentTransactions(accessToken) {
             'X-Timestamp': timestamp,
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + signature_1.generateSignature({
-                data: data,
+                data: null,
                 requestUrl: this.openApiUrl + "/payment/transactions",
                 nonceStr: nonceStr,
                 signType: 'sha256',
@@ -111,7 +110,6 @@ exports.getPaymentTransactions = getPaymentTransactions;
 function getPaymentTransactionById(accessToken, Id) {
     var nonceStr = crypto.randomBytes(32).toString('hex');
     var timestamp = new Date().getTime().toString();
-    var data = {};
     return this.openApiInstance({
         url: "/payment/transaction/" + Id,
         method: 'get',
@@ -121,7 +119,7 @@ function getPaymentTransactionById(accessToken, Id) {
             'X-Timestamp': timestamp,
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + signature_1.generateSignature({
-                data: data,
+                data: null,
                 requestUrl: this.openApiUrl + ("/payment/transaction/" + Id),
                 nonceStr: nonceStr,
                 signType: 'sha256',
@@ -137,7 +135,6 @@ exports.getPaymentTransactionById = getPaymentTransactionById;
 function getPaymentTransactionByOrderId(accessToken, orderId) {
     var nonceStr = crypto.randomBytes(32).toString('hex');
     var timestamp = new Date().getTime().toString();
-    var data = {};
     return this.openApiInstance({
         url: "/payment/transaction/order/" + orderId,
         method: 'get',
@@ -147,7 +144,7 @@ function getPaymentTransactionByOrderId(accessToken, orderId) {
             'X-Timestamp': timestamp,
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + signature_1.generateSignature({
-                data: data,
+                data: null,
                 requestUrl: this.openApiUrl + ("/payment/transaction/order/" + orderId),
                 nonceStr: nonceStr,
                 signType: 'sha256',

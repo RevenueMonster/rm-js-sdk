@@ -5,6 +5,7 @@ var lodash_1 = require("lodash");
 var credentials_1 = require("./credentials");
 var quickPay_1 = require("./payment/quickPay");
 var transactionQR_1 = require("./payment/transactionQR");
+var webPayment_1 = require("./payment/webPayment");
 var merchant_1 = require("./merchant");
 var user_1 = require("./user");
 var store_1 = require("./store");
@@ -89,6 +90,7 @@ function RMSDK(instanceConfig) {
             getTransactionUrl: transactionQR_1.getTransactionUrl,
             getTransactionUrlByCode: transactionQR_1.getTransactionUrlByCode,
             getTransactionsByCode: transactionQR_1.getTransactionsByCode,
+            createWebPayment: webPayment_1.createWebPayment,
         },
         giveLoyaltyPoint: loyalty_1.giveLoyaltyPoint,
         issueVoucher: voucher_1.issueVoucher,
