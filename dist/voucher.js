@@ -14,7 +14,7 @@ function issueVoucher(accessToken, batchKey) {
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + signature_1.generateSignature({
                 data: null,
-                requestUrl: this.openApiUrl + ("voucher-batch/" + batchKey + "/issue"),
+                requestUrl: this.openApiUrl + ("/voucher-batch/" + batchKey + "/issue"),
                 nonceStr: nonceStr,
                 signType: 'sha256',
                 method: 'post',
@@ -38,7 +38,7 @@ function voidVoucher(accessToken, code) {
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + signature_1.generateSignature({
                 data: null,
-                requestUrl: this.openApiUrl + ("voucher/" + code + "/issue"),
+                requestUrl: this.openApiUrl + ("/voucher/" + code + "/issue"),
                 nonceStr: nonceStr,
                 signType: 'sha256',
                 method: 'post',
@@ -62,7 +62,7 @@ function getVoucherByCode(accessToken, code) {
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + signature_1.generateSignature({
                 data: null,
-                requestUrl: this.openApiUrl + ("voucher/" + code),
+                requestUrl: this.openApiUrl + ("/voucher/" + code),
                 nonceStr: nonceStr,
                 signType: 'sha256',
                 method: 'get',
@@ -86,7 +86,7 @@ function getVoucherBatches(accessToken) {
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + signature_1.generateSignature({
                 data: null,
-                requestUrl: this.openApiUrl + "voucher-batches",
+                requestUrl: this.openApiUrl + "/voucher-batches",
                 nonceStr: nonceStr,
                 signType: 'sha256',
                 method: 'get',
@@ -110,7 +110,7 @@ function getVoucherBatchByKey(accessToken, batchKey) {
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + signature_1.generateSignature({
                 data: null,
-                requestUrl: this.openApiUrl + ("voucher-batches" + batchKey),
+                requestUrl: this.openApiUrl + ("/voucher-batch/" + batchKey),
                 nonceStr: nonceStr,
                 signType: 'sha256',
                 method: 'get',
