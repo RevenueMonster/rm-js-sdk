@@ -15,7 +15,7 @@ export function issueVoucher(this: RMSDKInstance, accessToken: string, batchKey:
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + generateSignature({
                 data: null,
-                requestUrl: this.openApiUrl + `voucher-batch/${batchKey}/issue`,
+                requestUrl: this.openApiUrl + `/voucher-batch/${batchKey}/issue`,
                 nonceStr,
                 signType: 'sha256',
                 method: 'post',
@@ -40,7 +40,7 @@ export function voidVoucher(this: RMSDKInstance, accessToken: string, code: stri
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + generateSignature({
                 data: null,
-                requestUrl: this.openApiUrl + `voucher/${code}/issue`,
+                requestUrl: this.openApiUrl + `/voucher/${code}/issue`,
                 nonceStr,
                 signType: 'sha256',
                 method: 'post',
@@ -65,11 +65,11 @@ export function getVoucherByCode(this: RMSDKInstance, accessToken: string, code:
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + generateSignature({
                 data: null,
-                requestUrl: this.openApiUrl + `voucher/${code}`,
-                nonceStr,
+                requestUrl: this.openApiUrl + `/voucher/${code}`,
+                nonceStr: nonceStr,
                 signType: 'sha256',
                 method: 'get',
-                timestamp,
+                timestamp: timestamp,
             }, this.privateKey)
         }
     })
@@ -90,11 +90,11 @@ export function getVoucherBatches(this: RMSDKInstance, accessToken: string) {
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + generateSignature({
                 data: null,
-                requestUrl: this.openApiUrl + `voucher-batches`,
-                nonceStr,
+                requestUrl: this.openApiUrl + `/voucher-batches`,
+                nonceStr: nonceStr,
                 signType: 'sha256',
                 method: 'get',
-                timestamp,
+                timestamp: timestamp,
             }, this.privateKey)
         }
     })
@@ -115,7 +115,7 @@ export function getVoucherBatchByKey(this: RMSDKInstance, accessToken: string, b
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + generateSignature({
                 data: null,
-                requestUrl: this.openApiUrl + `voucher-batches${batchKey}`,
+                requestUrl: this.openApiUrl + `/voucher-batch/${batchKey}`,
                 nonceStr,
                 signType: 'sha256',
                 method: 'get',
