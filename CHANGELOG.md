@@ -1,3 +1,11 @@
+1.0.10
+=====
+* Fix special character issue when generate signature.
+
+1.0.9
+=====
+* Fix voucher uri issue
+
 1.0.8
 =====
 * Fix issue data in request does not sort before send. Causing 'INVALID_REQUEST_SIGNATURE' problem.
