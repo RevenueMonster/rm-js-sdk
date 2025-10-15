@@ -38,8 +38,9 @@ export function generateSignature(
 
   if (arg.data !== null && typeof arg.data === 'object') {
     const signature_body = sortObject(arg.data);
-    const jsonValue = replaceSpecialCharacters(JSON.stringify(signature_body));
-    const signature = Buffer.from(jsonValue).toString('base64');
+    const json = JSON.stringify(signature_body);
+    const escaped = replaceSpecialCharacters(json).trim();
+    const signature = Buffer.from(escaped).toString('base64');
     signature_data = 'data=' + signature + '&';
   }
 
