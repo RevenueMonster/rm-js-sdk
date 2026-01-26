@@ -304,6 +304,14 @@ const result = await SDK.issueVoucher(
 const result = await SDK.voidVoucher(accessToken, 'NAklEfbVdV')
 ```
 
+### Reinstate voucher - reinstateVoucher(accessToken, code)
+```js
+const reinstateResult = await SDK.reinstateVoucher(accessToken, 'NAklEfbVdV', {
+        pin: "123456",
+        reason : "wrong order" //optional
+    });
+```
+
 ### Get voucher by code - getVoucherByCode(accessToken, code)
 ```js
 const result = await SDK.getVoucherByCode(accessToken, 'NAklEfbVdV')
