@@ -33,6 +33,7 @@ import { giveLoyaltyPoint, ILoyaltyRewardArg } from './loyalty';
 import { 
   issueVoucher,
   voidVoucher,
+  reinstateVoucher,
   getVoucherByCode,
   getVoucherBatches,
   getVoucherBatchByKey,
@@ -83,6 +84,7 @@ export interface RMSDKInstance {
 
   issueVoucher: (accessToken: string, batchKey: string) => Promise<any>,
   voidVoucher: (accessToken: string, code: string) => Promise<any>,
+  reinstateVoucher: (accessToken: string, code: string, data: object) => Promise<any>,
   getVoucherByCode: (accessToken: string, code: string) => Promise<any>,
   getVoucherBatches: (accessToken: string) => Promise<any>,
   getVoucherBatchByKey: (accessToken: string, batchKey: string) => Promise<any>,
@@ -225,6 +227,7 @@ export function RMSDK(instanceConfig?: config): RMSDKInstance {
 
     issueVoucher,
     voidVoucher,
+    reinstateVoucher,
     getVoucherByCode,
     getVoucherBatches,
     getVoucherBatchByKey,
