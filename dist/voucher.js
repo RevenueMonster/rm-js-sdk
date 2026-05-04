@@ -30,7 +30,7 @@ function voidVoucher(accessToken, code) {
     var nonceStr = crypto.randomBytes(32).toString('hex');
     var timestamp = new Date().getTime().toString();
     return this.openApiInstance({
-        url: "voucher/" + code + "/issue",
+        url: "voucher/" + code + "/void",
         method: 'post',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
@@ -38,7 +38,7 @@ function voidVoucher(accessToken, code) {
             'X-Nonce-Str': nonceStr,
             'X-Signature': 'sha256 ' + signature_1.generateSignature({
                 data: null,
-                requestUrl: this.openApiUrl + ("/voucher/" + code + "/issue"),
+                requestUrl: this.openApiUrl + ("/voucher/" + code + "/void"),
                 nonceStr: nonceStr,
                 signType: 'sha256',
                 method: 'post',
@@ -102,7 +102,7 @@ function getVoucherBatchByKey(accessToken, batchKey) {
     var nonceStr = crypto.randomBytes(32).toString('hex');
     var timestamp = new Date().getTime().toString();
     return this.openApiInstance({
-        url: "voucher-batches" + batchKey,
+        url: "voucher-batch/" + batchKey,
         method: 'get',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
@@ -122,4 +122,29 @@ function getVoucherBatchByKey(accessToken, batchKey) {
         .catch(function (err) { return console.error(err); });
 }
 exports.getVoucherBatchByKey = getVoucherBatchByKey;
+function reinstateVoucher(accessToken, code, data) {
+    var nonceStr = crypto.randomBytes(32).toString('hex');
+    var timestamp = new Date().getTime().toString();
+    return this.openApiInstance({
+        url: "voucher/" + code + "/reinstate",
+        method: 'patch',
+        data: signature_1.sortObject(data),
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'X-Timestamp': timestamp,
+            'X-Nonce-Str': nonceStr,
+            'X-Signature': 'sha256 ' + signature_1.generateSignature({
+                data: data,
+                requestUrl: this.openApiUrl + ("/voucher/" + code + "/reinstate"),
+                nonceStr: nonceStr,
+                signType: 'sha256',
+                method: 'patch',
+                timestamp: timestamp,
+            }, this.privateKey)
+        }
+    })
+        .then(function (x) { return x.data; })
+        .catch(function (err) { return console.error(err); });
+}
+exports.reinstateVoucher = reinstateVoucher;
 //# sourceMappingURL=voucher.js.map

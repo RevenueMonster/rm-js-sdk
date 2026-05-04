@@ -95,6 +95,7 @@ function RMSDK(instanceConfig) {
         giveLoyaltyPoint: loyalty_1.giveLoyaltyPoint,
         issueVoucher: voucher_1.issueVoucher,
         voidVoucher: voucher_1.voidVoucher,
+        reinstateVoucher: voucher_1.reinstateVoucher,
         getVoucherByCode: voucher_1.getVoucherByCode,
         getVoucherBatches: voucher_1.getVoucherBatches,
         getVoucherBatchByKey: voucher_1.getVoucherBatchByKey,
