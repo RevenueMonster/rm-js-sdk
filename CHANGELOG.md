@@ -1,3 +1,7 @@
+1.0.11
+=====
+* Add reinstate voucher functionality
+
 1.0.10
 =====
 * Fix special character issue when generate signature.
