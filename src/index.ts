@@ -62,7 +62,8 @@ export namespace RM {
     ZAPP = 'ZAPP',
     TAPAY = 'TAPAY',
     MCASH = 'MCASH',
-    SARAWAKPAY = 'SARAWAKPAY'
+    SARAWAKPAY = 'SARAWAKPAY',
+    MASTERCARD = 'MASTERCARD'
   }
 
   export enum MobilePaymentMethod {
