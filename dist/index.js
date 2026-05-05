@@ -58,6 +58,7 @@ var RM;
         Method["ZAPP"] = "ZAPP";
         Method["TAPAY"] = "TAPAY";
         Method["MCASH"] = "MCASH";
+        Method["SARAWAKPAY"] = "SARAWAKPAY";
     })(Method = RM.Method || (RM.Method = {}));
     var MobilePaymentMethod;
     (function (MobilePaymentMethod) {

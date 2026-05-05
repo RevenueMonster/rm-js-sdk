@@ -19,7 +19,8 @@ export declare namespace RM {
         GOBIZ = "GOBIZ",
         ZAPP = "ZAPP",
         TAPAY = "TAPAY",
-        MCASH = "MCASH"
+        MCASH = "MCASH",
+        SARAWAKPAY = "SARAWAKPAY"
     }
     enum MobilePaymentMethod {
         WECHATPAY_MY = "WECHATPAY_MY",
