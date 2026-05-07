@@ -21,7 +21,8 @@ export declare namespace RM {
         TAPAY = "TAPAY",
         MCASH = "MCASH",
         SARAWAKPAY = "SARAWAKPAY",
-        MASTERCARD = "MASTERCARD"
+        MASTERCARD = "MASTERCARD",
+        FPX = "FPX"
     }
     enum MobilePaymentMethod {
         WECHATPAY_MY = "WECHATPAY_MY",
@@ -40,7 +41,8 @@ export declare namespace RM {
         GRABPAY_MY = "GRABPAY_MY",
         RAZER_MY = "RAZER_MY",
         GOBIZ_MY = "GOBIZ_MY",
-        MAYBANK_MY = "MAYBANK_MY"
+        MAYBANK_MY = "MAYBANK_MY",
+        FPX_MY = "FPX_MY"
     }
     interface CreateOnlinePayPayload {
         order: Order;

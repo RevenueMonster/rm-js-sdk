@@ -63,7 +63,8 @@ export namespace RM {
     TAPAY = 'TAPAY',
     MCASH = 'MCASH',
     SARAWAKPAY = 'SARAWAKPAY',
-    MASTERCARD = 'MASTERCARD'
+    MASTERCARD = 'MASTERCARD',
+    FPX = 'FPX'
   }
 
   export enum MobilePaymentMethod {
@@ -84,7 +85,8 @@ export namespace RM {
     GRABPAY_MY = 'GRABPAY_MY',
     RAZER_MY = 'RAZER_MY',
     GOBIZ_MY = 'GOBIZ_MY',
-    MAYBANK_MY = 'MAYBANK_MY'
+    MAYBANK_MY = 'MAYBANK_MY',
+    FPX_MY = 'FPX_MY'
   }
 
   export interface CreateOnlinePayPayload {

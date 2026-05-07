@@ -60,6 +60,7 @@ var RM;
         Method["MCASH"] = "MCASH";
         Method["SARAWAKPAY"] = "SARAWAKPAY";
         Method["MASTERCARD"] = "MASTERCARD";
+        Method["FPX"] = "FPX";
     })(Method = RM.Method || (RM.Method = {}));
     var MobilePaymentMethod;
     (function (MobilePaymentMethod) {
@@ -81,6 +82,7 @@ var RM;
         WebPaymentMethod["RAZER_MY"] = "RAZER_MY";
         WebPaymentMethod["GOBIZ_MY"] = "GOBIZ_MY";
         WebPaymentMethod["MAYBANK_MY"] = "MAYBANK_MY";
+        WebPaymentMethod["FPX_MY"] = "FPX_MY";
     })(WebPaymentMethod = RM.WebPaymentMethod || (RM.WebPaymentMethod = {}));
     var LayoutVersion;
     (function (LayoutVersion) {
