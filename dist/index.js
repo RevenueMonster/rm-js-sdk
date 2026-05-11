@@ -96,6 +96,7 @@ function RMSDK(instanceConfig) {
         issueVoucher: voucher_1.issueVoucher,
         voidVoucher: voucher_1.voidVoucher,
         reinstateVoucher: voucher_1.reinstateVoucher,
+        bulkRedeemVouchers: voucher_1.bulkRedeemVouchers,
         getVoucherByCode: voucher_1.getVoucherByCode,
         getVoucherBatches: voucher_1.getVoucherBatches,
         getVoucherBatchByKey: voucher_1.getVoucherBatchByKey,

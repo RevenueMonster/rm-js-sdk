@@ -48,6 +48,7 @@ yarn add rm-api-sdk
   * [get voucher by code](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-voucher-by-code---getvoucherbycodeaccesstoken-code)
   * [get list of voucher batches](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-list-of-voucher-batches---getvoucherbatchesaccesstoken)
   * [get voucher batch by key](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#get-voucher-batch-by-key---getvoucherbatchbykeyaccesstoken-batchkey)
+  * [bulk redeem vouchers](https://github.com/RevenueMonster/RM-API-SDK-Nodejs#bulk-redeem-vouchers---bulkRedeemVouchersaccesstoken-codes)
 
 ### Prerequisites
 1. Get Client ID and Client Secret from portal.
@@ -310,6 +311,11 @@ const reinstateResult = await SDK.reinstateVoucher(accessToken, 'NAklEfbVdV', {
         pin: "123456",
         reason : "wrong order" //optional
     });
+```
+
+### Bulk Redeem vouchers - bulkRedeemVouchers(accessToken, codes)
+```js
+const result = await SDK.bulkRedeemVouchers(accessToken, ['32zSv2W8', '344PNV5r', 'V2FrkTnh'])
 ```
 
 ### Get voucher by code - getVoucherByCode(accessToken, code)

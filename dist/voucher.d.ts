@@ -5,4 +5,5 @@ export declare function getVoucherByCode(this: RMSDKInstance, accessToken: strin
 export declare function getVoucherBatches(this: RMSDKInstance, accessToken: string): Promise<any>;
 export declare function getVoucherBatchByKey(this: RMSDKInstance, accessToken: string, batchKey: string): Promise<any>;
 export declare function reinstateVoucher(this: RMSDKInstance, accessToken: string, code: string, data: object): Promise<any>;
+export declare function bulkRedeemVouchers(this: RMSDKInstance, accessToken: string, codes: string[]): Promise<any>;
 //# sourceMappingURL=voucher.d.ts.map

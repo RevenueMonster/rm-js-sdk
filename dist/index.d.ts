@@ -33,6 +33,7 @@ export interface RMSDKInstance {
     issueVoucher: (accessToken: string, batchKey: string) => Promise<any>;
     voidVoucher: (accessToken: string, code: string) => Promise<any>;
     reinstateVoucher: (accessToken: string, code: string, data: object) => Promise<any>;
+    bulkRedeemVouchers: (accessToken: string, codes: string[]) => Promise<any>;
     getVoucherByCode: (accessToken: string, code: string) => Promise<any>;
     getVoucherBatches: (accessToken: string) => Promise<any>;
     getVoucherBatchByKey: (accessToken: string, batchKey: string) => Promise<any>;
