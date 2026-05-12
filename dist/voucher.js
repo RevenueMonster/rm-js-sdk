@@ -147,4 +147,30 @@ function reinstateVoucher(accessToken, code, data) {
         .catch(function (err) { return console.error(err); });
 }
 exports.reinstateVoucher = reinstateVoucher;
+function bulkRedeemVouchers(accessToken, codes) {
+    var data = { codes: codes };
+    var nonceStr = crypto.randomBytes(32).toString('hex');
+    var timestamp = new Date().getTime().toString();
+    return this.openApiInstance({
+        url: "vouchers/redeem",
+        method: 'post',
+        data: signature_1.sortObject(data),
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'X-Timestamp': timestamp,
+            'X-Nonce-Str': nonceStr,
+            'X-Signature': 'sha256 ' + signature_1.generateSignature({
+                data: data,
+                requestUrl: this.openApiUrl + "/vouchers/redeem",
+                nonceStr: nonceStr,
+                signType: 'sha256',
+                method: 'post',
+                timestamp: timestamp,
+            }, this.privateKey)
+        }
+    })
+        .then(function (x) { return x.data; })
+        .catch(function (err) { return console.error(err); });
+}
+exports.bulkRedeemVouchers = bulkRedeemVouchers;
 //# sourceMappingURL=voucher.js.map

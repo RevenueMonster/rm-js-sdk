@@ -1,3 +1,7 @@
+1.0.13
+=====
+* add bulk redeem voucher
+
 1.0.12
 =====
 * fix dist no compile issue
